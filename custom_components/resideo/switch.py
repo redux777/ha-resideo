@@ -284,7 +284,6 @@ class ResideoAccessorySwitch(OptimisticWriteMixin, ResideoAccessoryEntity, Switc
 class ResideoRoomPrioritySwitch(OptimisticWriteMixin, ResideoAccessoryEntity, SwitchEntity):
     """Toggle whether this remote room sensor's room is included in active priority averaging."""
 
-    _attr_entity_category = EntityCategory.CONFIG
     _attr_translation_key = "room_priority"
 
     def __init__(
@@ -344,7 +343,6 @@ class ResideoRoomPrioritySwitch(OptimisticWriteMixin, ResideoAccessoryEntity, Sw
 class ResideoThermostatRoomPrioritySwitch(OptimisticWriteMixin, ResideoEntity, SwitchEntity):
     """Toggle whether the thermostat's built-in sensor (Room 0) is included in priority averaging."""
 
-    _attr_entity_category = EntityCategory.CONFIG
     _attr_translation_key = "thermostat_room_priority"
 
     def __init__(

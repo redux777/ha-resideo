@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.4.1] - 2026-11-06
+
+### Changed
+- **Promote Room Priority Switches & Priority Mode Selector to Controls (`switch.py`, `select.py`)**:
+  - Removed `EntityCategory.CONFIG` from `ResideoRoomPrioritySwitch`, `ResideoThermostatRoomPrioritySwitch`, and `ResideoPriorityTypeSelect` so they appear under **Controls** (instead of **Configuration**) on device pages and are automatically surfaced in Home Assistant room/area overview cards.
+
 ## [v0.4.0] - 2026-11-06
 
 ### Added

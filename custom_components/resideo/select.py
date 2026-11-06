@@ -57,7 +57,6 @@ async def async_setup_entry(
 class ResideoPriorityTypeSelect(OptimisticWriteMixin, ResideoEntity, SelectEntity):
     """Select entity for the thermostat's room priority mode ('PickARoom' or 'FollowMe')."""
 
-    _attr_entity_category = EntityCategory.CONFIG
     _attr_translation_key = "priority_mode"
     _attr_options = list(PRIORITY_TYPE_OPTIONS)
 
