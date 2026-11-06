@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.4.2] - 2026-11-06
+
+### Fixed
+- **Prevent Stale `Room.OverallMotion` from Locking Wireless Sensor Motion `on` (`rooms.py`, `merge.py`)**:
+  - Removed the `RoomOverallMotion` fallback from `ResideoAccessory.motion` because the REST `/group/0/rooms` `Rooms[i].OverallMotion` field lags behind per-accessory `Sensor` push events (`OccupancyDet: false`), which previously prevented `binary_sensor.*_motion` from clearing when `OccupancyDet` turned `off`.
+  - `ResideoAccessory.motion` on `Model 4354` sensors now strictly tracks live `MotionDet || OccupancyDet`, and live `Rooms` push events synchronize both `MotionDet` and `OccupancyDet`.
+
 ## [v0.4.1] - 2026-11-06
 
 ### Changed

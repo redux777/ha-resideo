@@ -86,8 +86,6 @@ class ResideoAccessory(ResideoBaseObject):
             return True
         if self.is_air_sensor and bool(self._value.get("OccupancyDet")):
             return True
-        if not self.exclude_motion and "RoomOverallMotion" in self.attributes:
-            return bool(self.attributes["RoomOverallMotion"])
         return val
 
     @property
@@ -175,18 +173,7 @@ class ResideoRoom(ResideoBaseObject):
 
     @property
     def accessories(self) -> list[ResideoAccessory]:
-        raw_accs = self.attributes.get("Accessories") or []
-        air_count = sum(
-            1
-            for a in raw_accs
-            if (a.get("AccessoryAttribute") or {}).get("Type") == "IndoorAirSensor"
-        )
-        out: list[ResideoAccessory] = []
-        for a in raw_accs:
-            if air_count == 1 and (a.get("AccessoryAttribute") or {}).get("Type") == "IndoorAirSensor":
-                a = {**a, "RoomOverallMotion": self.overall_motion}
-            out.append(ResideoAccessory(a))
-        return out
+        return [ResideoAccessory(a) for a in (self.attributes.get("Accessories") or [])]
 
 
 class ResideoRooms(ResideoBaseObject):

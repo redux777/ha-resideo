@@ -224,6 +224,7 @@ def _apply_rooms(shadow: dict[str, Any], rooms: dict[str, Any], value: dict[str,
             if len(air_sensors) == 1:
                 av = air_sensors[0].setdefault("AccessoryValue", {})
                 av["MotionDet"] = bool(inner["OverallMotion"])
+                av["OccupancyDet"] = bool(inner["OverallMotion"])
         return
 
 
