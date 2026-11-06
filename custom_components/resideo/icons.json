@@ -1,12 +1,19 @@
 {
   "entity": {
     "sensor": {
+      "discharge_temperature": { "default": "mdi:thermometer-chevron-up" },
+      "return_temperature": { "default": "mdi:thermometer-chevron-down" },
+      "duct_temperature_delta": { "default": "mdi:thermometer-lines" },
       "indoor_humidity": { "default": "mdi:water-percent" },
       "outdoor_humidity": { "default": "mdi:water-percent" },
       "tvoc": { "default": "mdi:molecule" },
       "battery_status": { "default": "mdi:battery" },
       "heat_setpoint": { "default": "mdi:fire" },
       "cool_setpoint": { "default": "mdi:snowflake" },
+      "humidifier_setpoint": { "default": "mdi:air-humidifier" },
+      "dehumidifier_setpoint": { "default": "mdi:air-humidifier-off" },
+      "windows_protection": { "default": "mdi:window-closed-variant" },
+      "windows_protection_percentage": { "default": "mdi:window-closed-variant" },
       "setpoint_status": { "default": "mdi:thermostat" },
       "equipment_status": { "default": "mdi:hvac" },
       "demand": { "default": "mdi:gauge" },
@@ -42,9 +49,33 @@
       "temperature_units": { "default": "mdi:temperature-fahrenheit" },
       "matter_status": { "default": "mdi:home-automation" },
       "priority_status": { "default": "mdi:home-thermometer" },
+      "selected_priority_rooms": { "default": "mdi:floor-plan" },
+      "thermostat_local_temperature": { "default": "mdi:thermometer" },
+      "thermostat_temperature_actual": { "default": "mdi:thermometer-high" },
+      "thermostat_local_humidity": { "default": "mdi:water-percent" },
+      "eim_status": { "default": "mdi:expansion-card" },
+      "active_demand_mode": { "default": "mdi:hvac" },
+      "active_stages": { "default": "mdi:layers" },
+      "dehum_away_setpoint": { "default": "mdi:air-humidifier-off" },
+      "dehum_away_cool_setpoint": { "default": "mdi:snowflake" },
+      "humidifier_deadband": { "default": "mdi:water-sync" },
+      "air_filter_restart_days": { "default": "mdi:air-filter" },
+      "backlight_intensity": { "default": "mdi:brightness-6" },
+      "fault_temp_high_threshold": { "default": "mdi:thermometer-alert" },
+      "fault_temp_low_threshold": { "default": "mdi:thermometer-alert" },
+      "fault_humidity_high_threshold": { "default": "mdi:water-alert" },
+      "fault_humidity_low_threshold": { "default": "mdi:water-alert" },
+      "last_connectivity_change": { "default": "mdi:wifi-clock" },
       "occupancy_timeout": { "default": "mdi:timer-outline" }
     },
     "binary_sensor": {
+      "humidifier_running": { "default": "mdi:air-humidifier" },
+      "dehumidifier_running": { "default": "mdi:air-humidifier-off" },
+      "dehum_away_active": { "default": "mdi:home-export-outline" },
+      "stage_1_active": { "default": "mdi:numeric-1-circle" },
+      "stage_2_active": { "default": "mdi:numeric-2-circle" },
+      "stage_3_active": { "default": "mdi:numeric-3-circle" },
+      "stage_4_active": { "default": "mdi:numeric-4-circle" },
       "vacation_hold": { "default": "mdi:airplane" },
       "freeze_protection": { "default": "mdi:snowflake-alert" },
       "freeze_protection_configured": { "default": "mdi:snowflake-check" },
@@ -57,10 +88,13 @@
       "schedule": { "default": "mdi:calendar-check" },
       "emergency_heat": { "default": "mdi:radiator" },
       "exclude_motion": { "default": "mdi:motion-sensor-off" },
-      "exclude_temperature": { "default": "mdi:thermometer-off" }
+      "exclude_temperature": { "default": "mdi:thermometer-off" },
+      "room_priority": { "default": "mdi:home-thermometer" },
+      "thermostat_room_priority": { "default": "mdi:home-thermometer" }
     },
     "select": {
-      "occupancy_sensitivity": { "default": "mdi:motion-sensor" }
+      "occupancy_sensitivity": { "default": "mdi:motion-sensor" },
+      "priority_mode": { "default": "mdi:home-thermometer-outline" }
     },
     "number": {
       "freeze_protection_low_limit": { "default": "mdi:snowflake-thermometer" },

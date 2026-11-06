@@ -76,6 +76,48 @@ DEVICE_BINARY_SENSORS: tuple[ResideoBinarySensorEntityDescription, ...] = (
         value_fn=lambda d: d.thermostat.circulation_fan_request,
     ),
     ResideoBinarySensorEntityDescription(
+        key="humidifier_running", translation_key="humidifier_running",
+        device_class=BinarySensorDeviceClass.RUNNING,
+        value_fn=lambda d: d.thermostat.humidifier_running,
+        exists_fn=lambda d: d.thermostat.humidifier_running is not None,
+    ),
+    ResideoBinarySensorEntityDescription(
+        key="dehumidifier_running", translation_key="dehumidifier_running",
+        device_class=BinarySensorDeviceClass.RUNNING,
+        value_fn=lambda d: d.thermostat.dehumidifier_running,
+        exists_fn=lambda d: d.thermostat.dehumidifier_running is not None,
+    ),
+    ResideoBinarySensorEntityDescription(
+        key="dehum_away_active", translation_key="dehum_away_active",
+        entity_category=DIAG,
+        value_fn=lambda d: d.thermostat.dehum_away_active,
+        exists_fn=lambda d: d.thermostat.dehum_away_active is not None,
+    ),
+    ResideoBinarySensorEntityDescription(
+        key="stage_1_active", translation_key="stage_1_active",
+        device_class=BinarySensorDeviceClass.RUNNING, entity_category=DIAG,
+        value_fn=lambda d: bool(d.thermostat.stages_on[0]) if len(d.thermostat.stages_on) > 0 else False,
+        exists_fn=lambda d: len(d.thermostat.stages_on) > 0,
+    ),
+    ResideoBinarySensorEntityDescription(
+        key="stage_2_active", translation_key="stage_2_active",
+        device_class=BinarySensorDeviceClass.RUNNING, entity_category=DIAG,
+        value_fn=lambda d: bool(d.thermostat.stages_on[1]) if len(d.thermostat.stages_on) > 1 else False,
+        exists_fn=lambda d: len(d.thermostat.stages_on) > 1,
+    ),
+    ResideoBinarySensorEntityDescription(
+        key="stage_3_active", translation_key="stage_3_active",
+        device_class=BinarySensorDeviceClass.RUNNING, entity_category=DIAG,
+        value_fn=lambda d: bool(d.thermostat.stages_on[2]) if len(d.thermostat.stages_on) > 2 else False,
+        exists_fn=lambda d: len(d.thermostat.stages_on) > 2,
+    ),
+    ResideoBinarySensorEntityDescription(
+        key="stage_4_active", translation_key="stage_4_active",
+        device_class=BinarySensorDeviceClass.RUNNING, entity_category=DIAG,
+        value_fn=lambda d: bool(d.thermostat.stages_on[3]) if len(d.thermostat.stages_on) > 3 else False,
+        exists_fn=lambda d: len(d.thermostat.stages_on) > 3,
+    ),
+    ResideoBinarySensorEntityDescription(
         key="adaptive_recovery_active", translation_key="adaptive_recovery_active",
         device_class=BinarySensorDeviceClass.RUNNING, entity_category=DIAG,
         value_fn=lambda d: d.thermostat.adaptive_recovery_active,

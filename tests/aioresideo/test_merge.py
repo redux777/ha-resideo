@@ -230,6 +230,87 @@ def test_displayed_outdoor_temperature_merge(device_shadow, rooms, fixture_loade
     assert ResideoThermostat(shadow).outdoor_temperature == 90  # only delivered via push; was 82.0
 
 
+def test_duct_temperature_merge(device_shadow, rooms) -> None:
+    feed = ResideoLiveFeed(
+        "AABBCCDDEEFF",
+        "DuctTemperature",
+        {"DischargeTemp": 84.5, "ReturnTemp": 72.5},
+        None,
+    )
+    shadow, _ = apply_live_feed(device_shadow, rooms, feed)
+    t = ResideoThermostat(shadow)
+    assert t.discharge_temperature == 84.5
+    assert t.return_temperature == 72.5
+    assert t.duct_temperature_delta == 12.0
+
+
+def test_humidification_merge(device_shadow, rooms) -> None:
+    feed = ResideoLiveFeed(
+        "AABBCCDDEEFF",
+        "Humidification",
+        {
+            "HumidifierStatus": "On",
+            "DehumidifierStatus": "Off",
+            "HumidifierSetpoint": 42,
+            "DehumidifierSetpoint": 58,
+            "WindowsProtection": 5,
+            "WindowsProtectionPercentage": 85.0,
+        },
+        None,
+    )
+    shadow, _ = apply_live_feed(device_shadow, rooms, feed)
+    t = ResideoThermostat(shadow)
+    assert t.humidifier_running is True
+    assert t.dehumidifier_running is False
+    assert t.humidifier_setpoint == 42
+    assert t.dehumidifier_setpoint == 58
+    assert t.windows_protection == 5
+    assert t.windows_protection_percentage == 85.0
+
+
+def test_sensor_eim_header_routes_to_first_remote(device_shadow, rooms) -> None:
+    """When an EIM (AccessoryId 1, Type EquipmentInterfaceModule) sits between the thermostat (0)
+    and the first remote sensor (2), a remote Sensor push with header AccessoryId 1 routes to 2."""
+    with_eim = copy.deepcopy(rooms)
+    with_eim["Rooms"][0]["Accessories"].append(
+        {
+            "AccessoryId": 1,
+            "AccessoryAttribute": {"Type": "EquipmentInterfaceModule", "Model": "4353"},
+            "AccessoryValue": {"Status": "Ok"},
+        }
+    )
+    with_eim["Rooms"][1]["Accessories"][0]["AccessoryId"] = 2
+    eim_header_push = ResideoLiveFeed(
+        "AABBCCDDEEFF",
+        "Sensor",
+        {
+            "RoomId": 0,
+            "AccessoryId": 1,
+            "AccessoryAttribute": {"Id": 0, "Type": "EI", "Name": "Other"},
+            "AccessoryValue": {
+                "Id": 0,
+                "IndoorTemperature": 71.0,
+                "IndoorHumidity": 52,
+                "OccupancyDet": True,
+                "MotionDet": False,
+                "BatteryStatus": "Ok",
+                "RssiAverage": -48,
+                "Status": "Ok",
+            },
+        },
+        None,
+    )
+    _s, new_rooms = apply_live_feed(device_shadow, with_eim, eim_header_push)
+    rr = ResideoRooms(new_rooms)
+    assert rr.eim_accessory is not None and rr.eim_accessory.status == "Ok"
+    _room, remote = rr.air_sensor_accessories()[0]
+    assert remote.accessory_id == 2
+    assert remote.indoor_temperature == 71.0
+    assert remote.occupancy is True
+    # Model 4354 remote sensors report MotionDet=False while OccupancyDet=True; motion falls back
+    assert remote.motion is True
+
+
 def test_merged_properties_set_matches_dispatch() -> None:
     """The exported set the coordinator routes on must equal the actual dispatch table."""
     from custom_components.resideo.aioresideo import LIVE_FEED_MERGED_PROPERTIES

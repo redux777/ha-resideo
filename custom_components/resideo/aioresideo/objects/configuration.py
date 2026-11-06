@@ -136,3 +136,32 @@ class ResideoConfiguration(ResideoBaseObject):
     @property
     def available_schedule_types(self) -> list[str]:
         return (self.reported.get("ScheduleCapabilities") or {}).get("AvailableScheduleTypes") or []
+
+    # -- humidifier / dehumidifier / filter / fault threshold config ----------
+    @property
+    def humidifier_deadband(self) -> int | None:
+        return self.reported.get("HumidifierDeadband")
+
+    @property
+    def air_filter_restart_days(self) -> int | None:
+        return ((self.reported.get("AirFilterReminders") or {}).get("1") or {}).get("RestartDays")
+
+    @property
+    def _fault_thresholds(self) -> dict[str, Any]:
+        return self.reported.get("FaultThresholds", {}) or {}
+
+    @property
+    def fault_temp_high_threshold(self) -> float | None:
+        return self._as_float(self._fault_thresholds.get("TemperatureHighThreshold"))
+
+    @property
+    def fault_temp_low_threshold(self) -> float | None:
+        return self._as_float(self._fault_thresholds.get("TemperatureLowThreshold"))
+
+    @property
+    def fault_humidity_high_threshold(self) -> int | None:
+        return self._fault_thresholds.get("HumidityHighThreshold")
+
+    @property
+    def fault_humidity_low_threshold(self) -> int | None:
+        return self._fault_thresholds.get("HumidityLowThreshold")

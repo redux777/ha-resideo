@@ -81,7 +81,14 @@ class ResideoAccessory(ResideoBaseObject):
 
     @property
     def motion(self) -> bool | None:
-        return self._value.get("MotionDet")
+        val = self._value.get("MotionDet")
+        if bool(val):
+            return True
+        if self.is_air_sensor and bool(self._value.get("OccupancyDet")):
+            return True
+        if not self.exclude_motion and "RoomOverallMotion" in self.attributes:
+            return bool(self.attributes["RoomOverallMotion"])
+        return val
 
     @property
     def occupancy(self) -> bool | None:
@@ -168,7 +175,18 @@ class ResideoRoom(ResideoBaseObject):
 
     @property
     def accessories(self) -> list[ResideoAccessory]:
-        return [ResideoAccessory(a) for a in (self.attributes.get("Accessories") or [])]
+        raw_accs = self.attributes.get("Accessories") or []
+        air_count = sum(
+            1
+            for a in raw_accs
+            if (a.get("AccessoryAttribute") or {}).get("Type") == "IndoorAirSensor"
+        )
+        out: list[ResideoAccessory] = []
+        for a in raw_accs:
+            if air_count == 1 and (a.get("AccessoryAttribute") or {}).get("Type") == "IndoorAirSensor":
+                a = {**a, "RoomOverallMotion": self.overall_motion}
+            out.append(ResideoAccessory(a))
+        return out
 
 
 class ResideoRooms(ResideoBaseObject):
@@ -192,6 +210,15 @@ class ResideoRooms(ResideoBaseObject):
         for room in self.rooms:
             for accessory in room.accessories:
                 if accessory.is_thermostat:
+                    return accessory
+        return None
+
+    @property
+    def eim_accessory(self) -> ResideoAccessory | None:
+        """The RedLINK Equipment Interface Module (EIM) accessory, if any."""
+        for room in self.rooms:
+            for accessory in room.accessories:
+                if accessory.type == "EquipmentInterfaceModule":
                     return accessory
         return None
 

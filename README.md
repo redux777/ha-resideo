@@ -1,9 +1,9 @@
 # Resideo — Home Assistant integration
 
 [![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5)](https://hacs.xyz/docs/faq/custom_repositories/)
-[![GitHub release](https://img.shields.io/github/v/release/sfcodes/ha-resideo)](https://github.com/sfcodes/ha-resideo/releases)
-[![CI](https://github.com/sfcodes/ha-resideo/actions/workflows/ci.yml/badge.svg)](https://github.com/sfcodes/ha-resideo/actions/workflows/ci.yml)
-[![License](https://img.shields.io/github/license/sfcodes/ha-resideo)](LICENSE)
+[![GitHub release](https://img.shields.io/github/v/release/redux777/ha-resideo)](https://github.com/redux777/ha-resideo/releases)
+[![CI](https://github.com/redux777/ha-resideo/actions/workflows/ci.yml/badge.svg)](https://github.com/redux777/ha-resideo/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/redux777/ha-resideo)](LICENSE)
 
 Control your **Resideo** thermostats from Home Assistant. Sign in with the **same email and
 password** you use in the **First Alert** app — Resideo's current app for these thermostats —
@@ -44,8 +44,12 @@ Entities only appear when your hardware actually supports them — no dead tiles
 | Entity | Type | Notes |
 | --- | --- | --- |
 | Thermostat | `climate` | Current temperature & humidity; heat / cool / off (+ auto where supported); target temperature or range; fan **Auto / Circulate / On**; presets **None / Temporary hold / Permanent hold** |
-| Indoor / Outdoor temperature | `sensor` | Shown in your Home Assistant unit system (°F/°C) |
-| Indoor / Outdoor humidity | `sensor` | |
+| Indoor / Outdoor temperature | `sensor` | Shown in your Home Assistant unit system (°F/°C), plus local wall-unit temperature & high-precision thermistor reading |
+| Indoor / Outdoor humidity | `sensor` | Plus local wall-unit humidity |
+| Discharge / Return duct temperature & ΔT | `sensor` | Exposed when EIM supply/return duct probes are wired (`DuctTemperature`) |
+| Humidifier / Dehumidifier | `binary_sensor`, `sensor` | Live running states, target setpoints, deadband, away dehumidification, and window condensation protection |
+| Active HVAC stages (1–4) | `binary_sensor`, `sensor` | Individual stage relay binary sensors (`StagesOn[0..3]`) and active demand mode |
+| Priority mode & Room priority | `select`, `switch`, `sensor` | Switch between **PickARoom** and **FollowMe**, toggle individual rooms in/out of temperature averaging, and view active priority rooms |
 | Carbon dioxide, VOC | `sensor` | Air-quality models only |
 | Connectivity | `binary_sensor` | Reports **Disconnected** when the thermostat drops offline |
 | Fan, Circulation fan | `binary_sensor` | Whether air is moving, and why |
@@ -59,14 +63,16 @@ Entities only appear when your hardware actually supports them — no dead tiles
 | Freeze protection floor | `number` | A 35–45 °F "pipes shall not freeze" floor |
 
 <details>
-<summary>The nerd drawer: ~45 diagnostic entities, if you're into that</summary>
+<summary>The nerd drawer: ~60+ diagnostic entities, if you're into that</summary>
 
-Heat/Cool setpoint, Hold status, Equipment status, Demand, Current stage, Air / CO2 / VOC /
-Humidity quality, Schedule period / day / type, Backlight, Room priority, Air filter remaining,
-Firmware (+ status, last updated), Faults, Signal strength, Heat/cool mode, Fan reason, Demand
-response, Adaptive recovery mode, Ventilation & ventilation-boost timers, Language, Registered,
-Heating/Cooling system & stages, Temperature units, Matter status, Priority status — plus
-Vacation hold, Freeze protection, Away mode, and Commercial mode binary sensors.
+Heat/Cool setpoint, Hold status, Equipment status, EIM status, Demand, Current stage, Active stages,
+Air / CO2 / VOC / Humidity quality, Schedule period / day / type, Backlight & backlight intensity,
+Room priority & active priority rooms, Air filter remaining & filter life, High/Low temperature and
+humidity alert thresholds, Firmware (+ status, last updated), Faults, Signal strength, Heat/cool
+mode, Fan reason, Demand response, Adaptive recovery mode, Ventilation & ventilation-boost timers,
+Language, Registered, Last connectivity change, Heating/Cooling system & stages, Temperature units,
+Matter status, Priority status — plus Vacation hold, Freeze protection, Away mode, Dehumidification
+away active, and Commercial mode binary sensors.
 
 </details>
 
@@ -76,8 +82,9 @@ Vacation hold, Freeze protection, Away mode, and Commercial mode binary sensors.
 | --- | --- | --- |
 | Temperature, Humidity | `sensor` | Per-room readings the thermostat averages |
 | Carbon dioxide, VOC | `sensor` | Air-quality sensor models only |
-| Motion, Occupancy | `binary_sensor` | |
-| Exclude motion / Exclude temperature | `switch` | Drop this room from occupancy/averaging |
+| Motion, Occupancy | `binary_sensor` | Includes fallback to `OccupancyDet` / `OverallMotion` and EIM off-by-one SignalR routing for `Model 4354` sensors |
+| Room priority | `switch` | Include or exclude this room from active thermostat priority averaging (`SelectedRooms`) |
+| Exclude motion / Exclude temperature | `switch` | Drop this room from occupancy/averaging (`accessoryValue`) |
 | Occupancy sensitivity | `select` | Takes effect at the sensor's next check-in (battery life comes first) |
 | Battery, Signal strength, Status | `sensor` | Diagnostic |
 
@@ -87,12 +94,12 @@ Vacation hold, Freeze protection, Away mode, and Commercial mode binary sensors.
 
 The one-click way:
 
-[![Open your Home Assistant instance and open this repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=sfcodes&repository=ha-resideo&category=integration)
+[![Open your Home Assistant instance and open this repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=redux777&repository=ha-resideo&category=integration)
 
 The clicking-around way:
 
 1. HACS → Integrations → ⋮ → **Custom repositories** → add
-   `https://github.com/sfcodes/ha-resideo`, category **Integration**.
+   `https://github.com/redux777/ha-resideo`, category **Integration**.
 2. Install **Resideo**, then restart Home Assistant.
 
 <details>
