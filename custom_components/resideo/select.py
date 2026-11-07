@@ -21,6 +21,9 @@ from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
 from .aioresideo.const import (
+    FAN_AUTO,
+    FAN_CIRCULATE,
+    FAN_ON,
     OCCUPANCY_SENSITIVITY_OPTIONS,
     PRIORITY_FOLLOW_ME,
     PRIORITY_PICK_A_ROOM,
@@ -33,6 +36,7 @@ from .entity import OptimisticWriteMixin, ResideoAccessoryEntity, ResideoEntity
 PARALLEL_UPDATES = 1
 
 PRIORITY_TYPE_OPTIONS = (PRIORITY_PICK_A_ROOM, PRIORITY_FOLLOW_ME)
+FAN_MODE_OPTIONS = (FAN_AUTO, FAN_CIRCULATE, FAN_ON)
 
 
 async def async_setup_entry(
@@ -40,10 +44,12 @@ async def async_setup_entry(
     entry: ResideoConfigEntry,
     async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
-    """Set up Resideo selects (thermostat priority mode + per remote room-sensor accessory)."""
+    """Set up Resideo selects (fan mode, thermostat priority mode + per remote room-sensor accessory)."""
     coordinator = entry.runtime_data
     entities: list[SelectEntity] = []
     for mac, data in coordinator.data.items():
+        if data.configuration.fan_positions or data.thermostat.fan_position is not None:
+            entities.append(ResideoFanModeSelect(coordinator, mac))
         if data.priority.priority_type is not None:
             entities.append(ResideoPriorityTypeSelect(coordinator, mac))
         for room, accessory in data.rooms.air_sensor_accessories():
@@ -52,6 +58,49 @@ async def async_setup_entry(
                     ResideoOccupancySensitivitySelect(coordinator, mac, room, accessory)
                 )
     async_add_entities(entities)
+
+
+class ResideoFanModeSelect(OptimisticWriteMixin, ResideoEntity, SelectEntity):
+    """Select entity for the thermostat's fan mode ('Auto', 'Circulate', 'On')."""
+
+    _attr_translation_key = "fan_mode"
+
+    def __init__(
+        self,
+        coordinator: ResideoDataUpdateCoordinator,
+        mac: str,
+    ) -> None:
+        super().__init__(coordinator, mac)
+        self._attr_unique_id = f"{mac}_fan_mode"
+
+    def _confirmed_values(self) -> dict[str, Any] | None:
+        device = self.device
+        if device is None:
+            return None
+        return {"current_option": device.fan_position}
+
+    @property
+    def options(self) -> list[str]:
+        config = self.configuration
+        positions = config.fan_positions if config else []
+        if not positions:
+            return list(FAN_MODE_OPTIONS)
+        rank = {m: i for i, m in enumerate(FAN_MODE_OPTIONS)}
+        return sorted(positions, key=lambda m: rank.get(m, len(rank)))
+
+    @property
+    def current_option(self) -> str | None:
+        if "current_option" in self._optimistic:
+            return self._optimistic["current_option"]
+        device = self.device
+        return device.fan_position if device else None
+
+    async def async_select_option(self, option: str) -> None:
+        try:
+            await self.coordinator.api.async_set_fan(self._mac, option)
+        except ResideoError as err:
+            raise HomeAssistantError(f"Failed to set fan mode: {err}") from err
+        await self._async_post_write({"current_option": option})
 
 
 class ResideoPriorityTypeSelect(OptimisticWriteMixin, ResideoEntity, SelectEntity):

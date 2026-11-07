@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.4.3] - 2026-11-07
+
+### Added
+- **Humidifier & Dehumidifier Setpoint Controls (`number.py`, `client.py`, `configuration.py`)**:
+  - Exposed writable **Humidifier setpoint** (`number.*_humidifier_setpoint`) and **Dehumidifier setpoint** (`number.*_dehumidifier_setpoint`) slider controls under **Controls** (`PUT .../humidifier/setpoint` and `PUT .../dehumidifier/setpoint` with `{"SetPointValue": <int>}`), dynamically bounded by `HumidificationMinimumSetpoint` / `HumidificationMaximumSetpoint` and `DehumidificationMinimumSetpoint` / `DehumidificationMaximumSetpoint` in `/configuration`.
+- **Standalone Fan Mode Control (`select.py`)**:
+  - Exposed a standalone **Fan mode** selector (`select.*_fan_mode`) under **Controls** for switching between `Auto`, `Circulate`, and `On` directly from device and area overview cards (`PUT .../fanSwitch`).
+
+### Fixed
+- **Clean Up Wireless Sensor Motion Fallback (`rooms.py`, `merge.py`)**:
+  - Removed the `OverallMotion` and `OccupancyDet` motion overrides so `ResideoAccessory.motion` strictly reflects raw `MotionDet` while preserving the EIM `AccessoryId` enumeration fix in `_sensor_push_target`.
+
 ## [v0.4.2] - 2026-11-06
 
 ### Fixed

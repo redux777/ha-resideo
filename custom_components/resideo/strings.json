@@ -232,9 +232,12 @@
     },
     "select": {
       "occupancy_sensitivity": { "name": "Occupancy sensitivity" },
-      "priority_mode": { "name": "Priority mode" }
+      "priority_mode": { "name": "Priority mode" },
+      "fan_mode": { "name": "Fan mode" }
     },
     "number": {
+      "humidifier_setpoint": { "name": "Humidifier setpoint" },
+      "dehumidifier_setpoint": { "name": "Dehumidifier setpoint" },
       "freeze_protection_low_limit": { "name": "Freeze protection floor" },
       "heat_setpoint_min": { "name": "Heat setpoint minimum" },
       "heat_setpoint_max": { "name": "Heat setpoint maximum" },

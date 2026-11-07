@@ -144,7 +144,25 @@ async def test_room_priority_switches_and_mode_select(
         "select",
         "select_option",
         {"entity_id": mode_sel, "option": "FollowMe"},
-        blocking=True,
     )
+    await hass.async_block_till_done()
     third_call = mock_api.async_set_priority.await_args_list[2]
     assert third_call.args == (MAC, "FollowMe", [0, 1])
+
+
+async def test_fan_mode_select(
+    hass: HomeAssistant, init_integration, mock_api
+) -> None:
+    """Standalone fan mode select controls FanSwitch position."""
+    fan_sel = eid(hass, "select", f"{MAC}_fan_mode")
+    assert hass.states.get(fan_sel).state == "Auto"
+    assert hass.states.get(fan_sel).attributes["options"] == ["Auto", "Circulate", "On"]
+
+    await hass.services.async_call(
+        "select",
+        "select_option",
+        {"entity_id": fan_sel, "option": "Circulate"},
+        blocking=True,
+    )
+    mock_api.async_set_fan.assert_awaited_once_with(MAC, "Circulate")
+    assert hass.states.get(fan_sel).state == "Circulate"

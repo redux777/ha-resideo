@@ -94,9 +94,12 @@
     },
     "select": {
       "occupancy_sensitivity": { "default": "mdi:motion-sensor" },
-      "priority_mode": { "default": "mdi:home-thermometer-outline" }
+      "priority_mode": { "default": "mdi:home-thermometer-outline" },
+      "fan_mode": { "default": "mdi:fan" }
     },
     "number": {
+      "humidifier_setpoint": { "default": "mdi:air-humidifier" },
+      "dehumidifier_setpoint": { "default": "mdi:air-humidifier-off" },
       "freeze_protection_low_limit": { "default": "mdi:snowflake-thermometer" },
       "heat_setpoint_min": { "default": "mdi:fire" },
       "heat_setpoint_max": { "default": "mdi:fire" },

@@ -212,19 +212,6 @@ def _apply_rooms(shadow: dict[str, Any], rooms: dict[str, Any], value: dict[str,
             if key == "Accessories" or new_val is None:
                 continue
             room[key] = new_val
-        # Propagate room-level OverallMotion to single-sensor IndoorAirSensor accessories
-        # when a fast `Rooms` push arrives before/without an individual `Sensor` push.
-        if "OverallMotion" in inner and inner["OverallMotion"] is not None:
-            air_sensors = [
-                acc
-                for acc in (room.get("Accessories") or [])
-                if _accessory_type(acc) == "IndoorAirSensor"
-                and not (acc.get("AccessoryValue") or {}).get("ExcludeMotion", False)
-            ]
-            if len(air_sensors) == 1:
-                av = air_sensors[0].setdefault("AccessoryValue", {})
-                av["MotionDet"] = bool(inner["OverallMotion"])
-                av["OccupancyDet"] = bool(inner["OverallMotion"])
         return
 
 

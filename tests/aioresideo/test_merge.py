@@ -307,8 +307,7 @@ def test_sensor_eim_header_routes_to_first_remote(device_shadow, rooms) -> None:
     assert remote.accessory_id == 2
     assert remote.indoor_temperature == 71.0
     assert remote.occupancy is True
-    # Model 4354 remote sensors report MotionDet=False while OccupancyDet=True; motion falls back
-    assert remote.motion is True
+    assert remote.motion is False
 
 
 def test_merged_properties_set_matches_dispatch() -> None:

@@ -161,12 +161,13 @@ class ResideoClient:
                 raise ResideoAuthError(f"Unauthorized (401) for {method} {url}")
             if not 200 <= resp.status < 300:
                 body = await self._safe_body(resp)
+                _LOGGER.debug("%s %s error body: %s", method, url, body)
                 if resp.status == 503:
                     raise ResideoUnavailableError(
                         f"{method} {url} -> 503", service_message=edge_message(body), body=body
                     )
                 raise ResideoApiError(
-                    f"{method} {url} -> {resp.status}", status=resp.status, body=body
+                    f"{method} {url} -> {resp.status} ({body})", status=resp.status, body=body
                 )
             if resp.status == 204:
                 return None
@@ -385,6 +386,18 @@ class ResideoClient:
         """
         return await self._command(
             mac, "freezeProtection", {"LowLimitDegrees": int(round(low_limit_degrees))}
+        )
+
+    async def set_humidifier_setpoint(self, mac: str, value: float) -> dict[str, Any]:
+        """Set the humidifier target setpoint (% RH). ✅ verified live."""
+        return await self._command(
+            mac, "humidifier/setpoint", {"SetPointValue": int(round(value))}
+        )
+
+    async def set_dehumidifier_setpoint(self, mac: str, value: float) -> dict[str, Any]:
+        """Set the dehumidifier target setpoint (% RH). ✅ verified live."""
+        return await self._command(
+            mac, "dehumidifier/setpoint", {"SetPointValue": int(round(value))}
         )
 
     async def set_setpoint_capabilities(

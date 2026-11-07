@@ -52,6 +52,8 @@ WRITE_METHODS = (
     "async_set_adaptive_recovery",
     "async_set_schedule_enabled",
     "async_set_freeze_protection",
+    "async_set_humidifier_setpoint",
+    "async_set_dehumidifier_setpoint",
     "async_set_setpoint_capabilities",
     "async_set_accessory_value",
 )

@@ -81,12 +81,7 @@ class ResideoAccessory(ResideoBaseObject):
 
     @property
     def motion(self) -> bool | None:
-        val = self._value.get("MotionDet")
-        if bool(val):
-            return True
-        if self.is_air_sensor and bool(self._value.get("OccupancyDet")):
-            return True
-        return val
+        return self._value.get("MotionDet")
 
     @property
     def occupancy(self) -> bool | None:

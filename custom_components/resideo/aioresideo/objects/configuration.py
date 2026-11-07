@@ -139,8 +139,32 @@ class ResideoConfiguration(ResideoBaseObject):
 
     # -- humidifier / dehumidifier / filter / fault threshold config ----------
     @property
+    def humidifier_enabled(self) -> bool:
+        return bool(self.reported.get("HumidifierEnabled", False))
+
+    @property
+    def min_humidifier_setpoint(self) -> int | None:
+        return self.reported.get("HumidificationMinimumSetpoint")
+
+    @property
+    def max_humidifier_setpoint(self) -> int | None:
+        return self.reported.get("HumidificationMaximumSetpoint")
+
+    @property
     def humidifier_deadband(self) -> int | None:
         return self.reported.get("HumidifierDeadband")
+
+    @property
+    def dehumidifier_enabled(self) -> bool:
+        return bool(self.reported.get("DehumidifierEnabled", False))
+
+    @property
+    def min_dehumidifier_setpoint(self) -> int | None:
+        return self.reported.get("DehumidificationMinimumSetpoint")
+
+    @property
+    def max_dehumidifier_setpoint(self) -> int | None:
+        return self.reported.get("DehumidificationMaximumSetpoint")
 
     @property
     def air_filter_restart_days(self) -> int | None:
