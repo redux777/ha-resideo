@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 
 from homeassistant.config_entries import ConfigEntryState
+from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers import issue_registry as ir
@@ -17,7 +18,7 @@ from custom_components.resideo.aioresideo.exceptions import (
 )
 from custom_components.resideo.const import CLOUD_UNAVAILABLE_ISSUE, DOMAIN
 
-from .conftest import MAC, FakeStream, eid
+from .conftest import MAC, FakeStream, eid, setup_integration
 
 # Verbatim from api.resideo.com, which has answered every consumer call with this since
 # Resideo retired that host in Sept 2026.
@@ -277,12 +278,48 @@ async def test_unload_leaves_the_repair_standing(
     assert _issue(hass, mock_config_entry) is None
 
 
+def _devices(hass: HomeAssistant, entry) -> tuple[dr.DeviceEntry, list[dr.DeviceEntry]]:
+    """The entry's thermostat device, and its other devices (the remote room sensors)."""
+    devices = dr.async_entries_for_config_entry(dr.async_get(hass), entry.entry_id)
+    thermostat = next(d for d in devices if (DOMAIN, MAC) in d.identifiers)
+    return thermostat, [d for d in devices if d is not thermostat]
+
+
+async def test_room_sensors_are_linked_to_their_thermostat(
+    hass: HomeAssistant, mock_config_entry, mock_api, caplog
+) -> None:
+    """A remote room sensor is a sub-device of its thermostat, linked by registry id."""
+    await setup_integration(hass, mock_config_entry, mock_api)
+
+    thermostat, room_sensors = _devices(hass, mock_config_entry)
+    assert room_sensors
+    assert all(d.via_device_id == thermostat.id for d in room_sensors)
+    # Home Assistant reports a deprecated registry call (``via_device`` since 2026.9)
+    # through this logger, naming the integration.
+    assert not [r for r in caplog.records if r.name == "homeassistant.helpers.frame"]
+
+
+async def test_room_sensor_link_does_not_depend_on_platform_order(
+    hass: HomeAssistant, mock_config_entry, mock_api
+) -> None:
+    """The thermostat is registered before any platform, so a platform that only has
+    room-sensor entities (``select``) can still link them when it is set up first."""
+    from unittest.mock import patch
+
+    with patch("custom_components.resideo.PLATFORMS", [Platform.SELECT]):
+        await setup_integration(hass, mock_config_entry, mock_api)
+
+        thermostat, room_sensors = _devices(hass, mock_config_entry)
+        assert room_sensors
+        assert all(d.via_device_id == thermostat.id for d in room_sensors)
+        assert await hass.config_entries.async_unload(mock_config_entry.entry_id)
+
+
 async def test_remove_config_entry_device(hass: HomeAssistant, init_integration) -> None:
     entry = init_integration
     registry = dr.async_get(hass)
 
-    live = registry.async_get_device(identifiers={(DOMAIN, MAC)})
-    assert live is not None
+    live, _ = _devices(hass, entry)
     stale = registry.async_get_or_create(
         config_entry_id=entry.entry_id, identifiers={(DOMAIN, "REMOVED_SENSOR")}
     )
@@ -299,7 +336,7 @@ async def test_token_rotation_persisted(
 
     from unittest.mock import patch
 
-    def _capture_resideo(session, *, refresh_token, token_updated_cb):
+    def _capture_resideo(session, *, refresh_token, token_updated_cb, command_cb):
         captured["cb"] = token_updated_cb
         return mock_api
 

@@ -21,8 +21,10 @@ from .aioresideo.exceptions import (
     ResideoError,
 )
 from .availability import async_clear_unavailable
+from .capture import ResideoCapture
 from .const import CONF_REFRESH_TOKEN, DOMAIN, PLATFORMS
 from .coordinator import ResideoConfigEntry, ResideoDataUpdateCoordinator
+from .entity import thermostat_device_info
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -40,13 +42,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ResideoConfigEntry) -> b
             data={**entry.data, CONF_REFRESH_TOKEN: tokens["refresh_token"]},
         )
 
+    capture = ResideoCapture()
     api = Resideo(
         session,
         refresh_token=entry.data[CONF_REFRESH_TOKEN],
         token_updated_cb=_token_updated,
+        command_cb=capture.record_command,
     )
 
-    coordinator = ResideoDataUpdateCoordinator(hass, entry, api)
+    coordinator = ResideoDataUpdateCoordinator(hass, entry, api, capture)
 
     # Bootstrap read — capabilities + the initial snapshot can't come from the stream.
     try:
@@ -71,6 +75,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: ResideoConfigEntry) -> b
     # ConfigEntryNotReady / ConfigEntryAuthFailed (HA retries setup); we never fall back to polling.
     await coordinator.async_start_streams()
     entry.async_on_unload(coordinator.async_stop_streams)
+
+    # Register each thermostat before its platforms. A remote room sensor links to it by
+    # registry id, which must exist when the first platform creates the sensor's device —
+    # and no platform is guaranteed to create a thermostat entity before a room-sensor one.
+    device_registry = dr.async_get(hass)
+    for mac, data in coordinator.data.items():
+        device_registry.async_get_or_create(
+            config_entry_id=entry.entry_id,
+            **thermostat_device_info(mac, data.thermostat),
+        )
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
