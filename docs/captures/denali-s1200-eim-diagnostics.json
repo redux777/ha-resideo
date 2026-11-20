@@ -1,0 +1,2063 @@
+{
+  "home_assistant": {
+    "arch": "x86_64",
+    "dev": false,
+    "docker": true,
+    "hassio": true,
+    "installation_type": "Home Assistant OS",
+    "os_name": "Linux",
+    "os_version": "6.18.58-haos",
+    "python_version": "3.14.10",
+    "timezone": "America/New_York",
+    "version": "2026.11.2",
+    "virtualenv": false,
+    "container_arch": "amd64",
+    "supervisor": "2026.11.0",
+    "host_os": "Home Assistant OS 18.4",
+    "docker_version": "29.8.2",
+    "chassis": "vm",
+    "run_as_root": true
+  },
+  "custom_components": {
+    "resideo": {
+      "documentation": "https://github.com/redux777/ha-resideo",
+      "version": "0.4.3",
+      "requirements": []
+    },
+    "armadarr": {
+      "documentation": "https://github.com/totaldebug/armadarr",
+      "version": "0.4.1",
+      "requirements": [
+        "pyarr>=6.8.0"
+      ]
+    },
+    "tryfi": {
+      "documentation": "https://github.com/sbabcock23/hass-tryfi",
+      "version": "0.1.1",
+      "requirements": []
+    },
+    "teamtracker": {
+      "documentation": "https://github.com/vasqued2/ha-teamtracker",
+      "version": "0.18.4",
+      "requirements": [
+        "arrow",
+        "aiofiles"
+      ]
+    },
+    "apc_modbus": {
+      "documentation": "https://github.com/aburow/apc-modbus-snmp-ha",
+      "version": "2.1.2",
+      "requirements": [
+        "pymodbus>=3.1.1"
+      ]
+    },
+    "robovac_mqtt": {
+      "documentation": "https://github.com/jeppesens/eufy-clean",
+      "version": "1.13.1",
+      "requirements": [
+        "Pillow>=10.0.0",
+        "tinytuya>=1.18.0,<2.0.0"
+      ]
+    },
+    "audiobookshelf": {
+      "documentation": "https://github.com/wolffshots/hass-audiobookshelf",
+      "version": "0.5.0",
+      "requirements": [
+        "aioaudiobookshelf>=0.1.24,<0.2"
+      ]
+    },
+    "ups_snmp_ha": {
+      "documentation": "https://github.com/aburow/ups-snmp-ha",
+      "version": "1.2.1",
+      "requirements": []
+    },
+    "govee": {
+      "documentation": "https://github.com/lasswellt/govee-homeassistant/blob/main/README.md",
+      "version": "2026.11.0",
+      "requirements": [
+        "aiohttp-retry>=2.8.3",
+        "aiomqtt>=2.0.0",
+        "bleak-retry-connector>=3.4.0"
+      ]
+    },
+    "tuya_local": {
+      "documentation": "https://github.com/make-all/tuya-local",
+      "version": "2026.10.0",
+      "requirements": [
+        "tinytuya==1.20.0",
+        "tuya-device-sharing-sdk~=0.2.4"
+      ]
+    },
+    "meross_lan": {
+      "documentation": "https://github.com/krahabb/meross_lan",
+      "version": "6.0.2",
+      "requirements": [
+        "bleak",
+        "paho-mqtt"
+      ]
+    },
+    "owlet": {
+      "documentation": "https://github.com/jensdufour/owlet",
+      "version": "2026.10.2",
+      "requirements": [
+        "pyowletapi==2025.4.1"
+      ]
+    },
+    "ipmi": {
+      "documentation": "https://github.com/ateodorescu/home-assistant-ipmi",
+      "version": "1.22.3",
+      "requirements": [
+        "python-ipmi>=0.5.8"
+      ]
+    },
+    "bambu_lab": {
+      "documentation": "https://github.com/greghesp/ha-bambulab",
+      "version": "2.4.1",
+      "requirements": [
+        "beautifulsoup4"
+      ]
+    },
+    "eagle_custom": {
+      "documentation": "https://www.home-assistant.io/integrations/rainforest_eagle",
+      "version": "1.0.0",
+      "requirements": [
+        "git+https://github.com/echristophe/aioeagle.git@support-https-and-eagle-3#aioeagle==1.1.2",
+        "eagle100==0.1.1"
+      ]
+    }
+  },
+  "integration_manifest": {
+    "domain": "resideo",
+    "name": "Resideo",
+    "codeowners": [
+      "sfcodes",
+      "redux777"
+    ],
+    "config_flow": true,
+    "dependencies": [],
+    "documentation": "https://github.com/redux777/ha-resideo",
+    "integration_type": "hub",
+    "iot_class": "cloud_push",
+    "issue_tracker": "https://github.com/redux777/ha-resideo/issues",
+    "loggers": [
+      "custom_components.resideo"
+    ],
+    "requirements": [],
+    "version": "0.4.3",
+    "is_built_in": false,
+    "overwrites_built_in": false
+  },
+  "setup_times": {
+    "null": {
+      "setup": 4.3743057176470757e-05
+    },
+    "01M3DASAK3HMXD1M8QWJWEA8Q3": {
+      "wait_import_platforms": -23.955954445991665,
+      "config_entry_setup": 26.76536042895168
+    }
+  },
+  "data": {
+    "entry": {
+      "data": {
+        "refresh_token": "**REDACTED**"
+      }
+    },
+    "account": {
+      "data": {
+        "id": "**REDACTED**",
+        "firstName": "**REDACTED**",
+        "lastName": "**REDACTED**",
+        "contactEmail": "**REDACTED**",
+        "primaryPhoneNumber": "**REDACTED**",
+        "countryCode": "US",
+        "locale": "en_US",
+        "consumerUsers": [
+          {
+            "id": "**REDACTED**",
+            "role": "OWNER",
+            "consumerAccount": {
+              "id": "**REDACTED**",
+              "consumerAccountClassification": "RESIDENTIAL",
+              "locations": [
+                {
+                  "id": "**REDACTED**",
+                  "name": "**REDACTED**",
+                  "consumerAccountId": "**REDACTED**",
+                  "address": "**REDACTED**",
+                  "geoCoordinate": "**REDACTED**",
+                  "consumerDevices": [
+                    {
+                      "id": "**REDACTED**",
+                      "name": "**REDACTED**",
+                      "consumerDeviceLocationId": "**REDACTED**",
+                      "device": {
+                        "id": "**REDACTED**",
+                        "deviceId": "**REDACTED**",
+                        "product": {
+                          "productName": "ElitePro S1200 Thermostat",
+                          "productCategories": [
+                            "AIR"
+                          ],
+                          "productFamily": "Thermostat",
+                          "productPlatform": "Denali"
+                        },
+                        "globalDeviceType": "Denali_S1200"
+                      },
+                      "createdAt": "**REDACTED**",
+                      "updatedAt": "**REDACTED**",
+                      "compositionMode": "STANDALONE"
+                    }
+                  ],
+                  "weatherLocationId": "**REDACTED**",
+                  "timeZone": "America/New_York",
+                  "isConfirmed": false
+                }
+              ]
+            }
+          }
+        ],
+        "pendingServices": [],
+        "consentRequired": false
+      },
+      "errors": []
+    },
+    "account_devices": [
+      {
+        "model": "Denali_S1200",
+        "kind": "LyricThermostatDevice",
+        "supported": true
+      }
+    ],
+    "capture_since": "2026-11-20T22:16:19.935+00:00",
+    "devices": [
+      {
+        "shadow": {
+          "DeviceId": "**REDACTED**",
+          "Reported": {
+            "DeviceName": "**REDACTED**",
+            "DataSyncInfo": {
+              "State": "Completed",
+              "TransactionId": "XaYZwLPUKyYgb8fd"
+            },
+            "SystemSwitch": "Auto",
+            "HeatCoolMode": "Cool",
+            "Setpoint": {
+              "SetpointStatus": "PermanentHold",
+              "HeatSetpoint": 70.0,
+              "CoolSetpoint": 74.0,
+              "FanSwitch": {
+                "Position": "Auto"
+              }
+            },
+            "DisplayedIndoorTemperature": 78.0,
+            "DisplayedOutdoorTemperature": 59.0,
+            "DisplayedIndoorHumidity": 35,
+            "DisplayedOutdoorHumidity": 44,
+            "FanSwitch": {
+              "Position": "Auto"
+            },
+            "FanReq": 1,
+            "OperationStatus": {
+              "Mode": "Cool",
+              "FanRequest": true,
+              "CirculationFanRequest": false
+            },
+            "HeatAndCoolDemand": {
+              "CurrentStage": 2,
+              "Demand": 100,
+              "Mode": "Cool",
+              "StagesOn": [
+                true,
+                true,
+                false,
+                false
+              ],
+              "FanRequest": true,
+              "CirculationFanRequest": false
+            },
+            "VacationHold": {
+              "Enabled": false
+            },
+            "VentilationTimer": 0,
+            "FeelsLikeEnabled": false,
+            "ActiveAdaptiveRecoveryMode": "None",
+            "IsAdaptiveRecoveryActive": false,
+            "ScheduleEnabled": false,
+            "Online": true,
+            "ThermostatFaults": [],
+            "BackLightState": "Active",
+            "CurrentSchedulePeriod": {
+              "Day": "Friday",
+              "Period": "Away"
+            },
+            "ScheduleType": {
+              "ScheduleType": "Timed",
+              "ScheduleSubtype": "NA"
+            },
+            "DemandResponseState": {
+              "EventId": -1,
+              "AffectedDevices": [
+                "Hvac"
+              ],
+              "IsOptOutable": false,
+              "IsLocallyOptOutable": true,
+              "OptedOut": false,
+              "Phases": [],
+              "CurrentDrEventState": "NotStarted"
+            },
+            "CurrentPriorityType": "PickARoom",
+            "VentilationBoostTimer": 0,
+            "CurrentLanguage": "English",
+            "InbuiltSensorState": {
+              "RoomId": 0,
+              "RoomName": "**REDACTED**"
+            },
+            "DehumidifierSetpoint": 60,
+            "DehumidifierRequest": 0,
+            "HumidifierSetpoint": 40,
+            "HumidifierRequest": 0,
+            "WindowsProtection": 4,
+            "WindowsProtectionPercentage": 83.0,
+            "DehumAway": {
+              "Active": false,
+              "DehumSetPoint": 60,
+              "CoolSetPoint": 72,
+              "FanPosition": "Auto"
+            },
+            "DuctTemperature": {
+              "DischargeTemperature": 48.094,
+              "ReturnTemperature": 74.477
+            },
+            "RegistrationDate": "**REDACTED**",
+            "LastConnectivityStatusChange": "2026-11-16T20:50:53.312+00:00",
+            "AirFilterReminders": {
+              "1": {
+                "RemainingDays": 42,
+                "IsAlertRaised": false
+              }
+            },
+            "FanReqReasons": [
+              "HumidifierFanOverRun",
+              "HeatingOrCoolingStagesOn",
+              "TempBalanceMonitoringSystem"
+            ],
+            "IndoorAirQuality": {
+              "TotalVolatileOrganicCompounds": {
+                "Status": "Ok",
+                "Quality": "VeryGood"
+              },
+              "EstimatedCarbonDioxide": {
+                "Status": "Ok",
+                "Quality": "VeryGood"
+              },
+              "HumidityQuality": "Dry",
+              "TotalIndoorAirQuality": {
+                "Status": "Ok",
+                "Quality": "Good"
+              }
+            },
+            "FirmwareSystem": {
+              "SwPackage": "01.3605.740",
+              "ImageStateResponse": {
+                "Status": "Valid",
+                "Reason": "System operating normally"
+              },
+              "LastCheckedResponse": {
+                "Time": "2026-11-20T18:37:05.000+00:00",
+                "Status": "No error"
+              },
+              "LastUpdated": "2026-09-25T20:47:05.000+00:00"
+            },
+            "ZoneData": {
+              "ZoneValues": {},
+              "ZoneAttributes": {},
+              "ZoneSummary": {}
+            },
+            "ZoneAccessories": {
+              "ZoneAccessories": [
+                {
+                  "AccessoryIndex": 0,
+                  "AccessoryType": "Thermostat",
+                  "ConnectionMethod": "WI",
+                  "Name": "**REDACTED**",
+                  "Model": "Unknown OS",
+                  "SerialNumber": "**REDACTED**",
+                  "SoftwareRevision": "01.3605.740",
+                  "HardwareRevision": "DENALI_TSTAT-001",
+                  "RssiAverage": -62
+                },
+                {
+                  "AccessoryIndex": 1,
+                  "AccessoryType": "EquipmentInterfaceModule",
+                  "ConnectionMethod": "RL",
+                  "Name": "**REDACTED**",
+                  "Model": "4353",
+                  "SerialNumber": "**REDACTED**",
+                  "SoftwareRevision": "2.0.1.0",
+                  "HardwareRevision": "tatus"
+                },
+                {
+                  "AccessoryIndex": 2,
+                  "AccessoryType": "IndoorAirSensor",
+                  "ConnectionMethod": "RL",
+                  "Name": "**REDACTED**",
+                  "Model": "4354",
+                  "SerialNumber": "**REDACTED**",
+                  "SoftwareRevision": "2.1.5.0",
+                  "HardwareRevision": "tus",
+                  "BatteryStatus": "Ok",
+                  "RssiAverage": -42
+                },
+                {
+                  "AccessoryIndex": 3,
+                  "AccessoryType": "IndoorAirSensor",
+                  "ConnectionMethod": "RL",
+                  "Name": "**REDACTED**",
+                  "Model": "4354",
+                  "SerialNumber": "**REDACTED**",
+                  "SoftwareRevision": "2.1.5.0",
+                  "HardwareRevision": "tus",
+                  "BatteryStatus": "Ok",
+                  "RssiAverage": -58
+                },
+                {
+                  "AccessoryIndex": 4,
+                  "AccessoryType": "IndoorAirSensor",
+                  "ConnectionMethod": "RL",
+                  "Name": "**REDACTED**",
+                  "Model": "4354",
+                  "SerialNumber": "**REDACTED**",
+                  "SoftwareRevision": "2.1.5.0",
+                  "HardwareRevision": "tus",
+                  "BatteryStatus": "Ok",
+                  "RssiAverage": -59
+                },
+                {
+                  "AccessoryIndex": 5,
+                  "AccessoryType": "IndoorAirSensor",
+                  "ConnectionMethod": "RL",
+                  "Name": "**REDACTED**",
+                  "Model": "4354",
+                  "SerialNumber": "**REDACTED**",
+                  "SoftwareRevision": "2.1.5.0",
+                  "HardwareRevision": "tus",
+                  "BatteryStatus": "Ok",
+                  "RssiAverage": -59
+                },
+                {
+                  "AccessoryIndex": 6,
+                  "AccessoryType": "IndoorAirSensor",
+                  "ConnectionMethod": "RL",
+                  "Name": "**REDACTED**",
+                  "Model": "4354",
+                  "SerialNumber": "**REDACTED**",
+                  "SoftwareRevision": "2.1.5.0",
+                  "HardwareRevision": "tus",
+                  "BatteryStatus": "Ok",
+                  "RssiAverage": -58
+                },
+                {
+                  "AccessoryIndex": 7,
+                  "AccessoryType": "IndoorAirSensor",
+                  "ConnectionMethod": "RL",
+                  "Name": "**REDACTED**",
+                  "Model": "4354",
+                  "SerialNumber": "**REDACTED**",
+                  "SoftwareRevision": "2.1.5.0",
+                  "HardwareRevision": "tus",
+                  "BatteryStatus": "Ok",
+                  "RssiAverage": -64
+                },
+                {
+                  "AccessoryIndex": 8,
+                  "AccessoryType": "IndoorAirSensor",
+                  "ConnectionMethod": "RL",
+                  "Name": "**REDACTED**",
+                  "Model": "4354",
+                  "SerialNumber": "**REDACTED**",
+                  "SoftwareRevision": "2.1.5.0",
+                  "HardwareRevision": "tus",
+                  "BatteryStatus": "Ok",
+                  "RssiAverage": -71
+                },
+                {
+                  "AccessoryIndex": 9,
+                  "AccessoryType": "IndoorAirSensor",
+                  "ConnectionMethod": "RL",
+                  "Name": "**REDACTED**",
+                  "Model": "4354",
+                  "SerialNumber": "**REDACTED**",
+                  "SoftwareRevision": "2.1.5.0",
+                  "HardwareRevision": "tus",
+                  "BatteryStatus": "Ok",
+                  "RssiAverage": -62
+                },
+                {
+                  "AccessoryIndex": 10,
+                  "AccessoryType": "IndoorAirSensor",
+                  "ConnectionMethod": "RL",
+                  "Name": "**REDACTED**",
+                  "Model": "4354",
+                  "SerialNumber": "**REDACTED**",
+                  "SoftwareRevision": "2.1.5.0",
+                  "HardwareRevision": "tus",
+                  "BatteryStatus": "Ok",
+                  "RssiAverage": -62
+                },
+                {
+                  "AccessoryIndex": 11,
+                  "AccessoryType": "IndoorAirSensor",
+                  "ConnectionMethod": "RL",
+                  "Name": "**REDACTED**",
+                  "Model": "4354",
+                  "SerialNumber": "**REDACTED**",
+                  "SoftwareRevision": "2.1.5.0",
+                  "HardwareRevision": "tus",
+                  "BatteryStatus": "Ok",
+                  "RssiAverage": -54
+                },
+                {
+                  "AccessoryIndex": 12,
+                  "AccessoryType": "IndoorAirSensor",
+                  "ConnectionMethod": "RL",
+                  "Name": "**REDACTED**",
+                  "Model": "4354",
+                  "SerialNumber": "**REDACTED**",
+                  "SoftwareRevision": "2.1.5.0",
+                  "HardwareRevision": "tus",
+                  "BatteryStatus": "Ok",
+                  "RssiAverage": -66
+                }
+              ]
+            },
+            "ThermostatDhwZone": {}
+          },
+          "Desired": {
+            "ZoneData": {
+              "ZoneValues": {},
+              "ZoneAttributes": {},
+              "ZoneSummary": {}
+            },
+            "ZoneAccessories": {
+              "ZoneAccessories": []
+            },
+            "ThermostatDhwZone": {}
+          }
+        },
+        "rooms": {
+          "DeviceId": "**REDACTED**",
+          "GroupId": 0,
+          "GroupName": "**REDACTED**",
+          "Rooms": [
+            {
+              "Id": 0,
+              "Name": "**REDACTED**",
+              "Type": "Other",
+              "OverallMotion": true,
+              "Accessories": [
+                {
+                  "AccessoryId": 0,
+                  "AccessoryAttribute": {
+                    "Type": "Thermostat",
+                    "ConnectionMethod": "WI",
+                    "Name": "**REDACTED**",
+                    "UserChangeEnable": false,
+                    "Model": "Unknown OS",
+                    "SerialNumber": "**REDACTED**",
+                    "SoftwareRevision": "01.3605.740",
+                    "HardwareRevision": "DENALI_TSTAT-001"
+                  },
+                  "AccessoryValue": {
+                    "IndoorHumidity": 39,
+                    "MotionDet": true,
+                    "OccupancyDet": true,
+                    "IndoorTemperature": 76.0,
+                    "ExcludeMotion": false,
+                    "Status": "Ok",
+                    "RssiAverage": -62,
+                    "PollutantLevels": [],
+                    "TotalVolatileOrganicCompounds": {
+                      "Measurement": 1.0,
+                      "Displayed": true
+                    },
+                    "CarbonDioxide": {
+                      "Measurement": 407.0,
+                      "Displayed": true
+                    },
+                    "TemperatureActual": 75.984
+                  }
+                },
+                {
+                  "AccessoryId": 1,
+                  "AccessoryAttribute": {
+                    "Type": "EquipmentInterfaceModule",
+                    "ConnectionMethod": "RL",
+                    "Name": "**REDACTED**",
+                    "UserChangeEnable": false,
+                    "Model": "4353",
+                    "SerialNumber": "**REDACTED**",
+                    "SoftwareRevision": "2.0.1.0",
+                    "HardwareRevision": "tatus"
+                  },
+                  "AccessoryValue": {
+                    "Status": "Ok",
+                    "PollutantLevels": []
+                  }
+                }
+              ],
+              "AvgTemperature": 76.0,
+              "AvgHumidity": 39.0
+            },
+            {
+              "Id": 1,
+              "Name": "**REDACTED**",
+              "Type": "Bedroom",
+              "OverallMotion": true,
+              "Accessories": [
+                {
+                  "AccessoryId": 2,
+                  "AccessoryAttribute": {
+                    "Type": "IndoorAirSensor",
+                    "ConnectionMethod": "RL",
+                    "Name": "**REDACTED**",
+                    "UserChangeEnable": false,
+                    "Model": "4354",
+                    "SerialNumber": "**REDACTED**",
+                    "SoftwareRevision": "2.1.5.0",
+                    "HardwareRevision": "tus"
+                  },
+                  "AccessoryValue": {
+                    "IndoorHumidity": 36,
+                    "MotionDet": true,
+                    "OccupancyDet": true,
+                    "IndoorTemperature": 78.0,
+                    "ExcludeTemp": false,
+                    "ExcludeMotion": false,
+                    "OccupancySensitivity": "High",
+                    "OccupancyTimeout": 0,
+                    "Status": "Ok",
+                    "BatteryStatus": "Ok",
+                    "RssiAverage": -42,
+                    "PollutantLevels": [],
+                    "TemperatureActual": 77.758
+                  }
+                }
+              ],
+              "AvgTemperature": 78.0,
+              "AvgHumidity": 36.0
+            },
+            {
+              "Id": 2,
+              "Name": "**REDACTED**",
+              "Type": "Bedroom",
+              "OverallMotion": false,
+              "Accessories": [
+                {
+                  "AccessoryId": 3,
+                  "AccessoryAttribute": {
+                    "Type": "IndoorAirSensor",
+                    "ConnectionMethod": "RL",
+                    "Name": "**REDACTED**",
+                    "UserChangeEnable": false,
+                    "Model": "4354",
+                    "SerialNumber": "**REDACTED**",
+                    "SoftwareRevision": "2.1.5.0",
+                    "HardwareRevision": "tus"
+                  },
+                  "AccessoryValue": {
+                    "IndoorHumidity": 41,
+                    "MotionDet": false,
+                    "OccupancyDet": false,
+                    "IndoorTemperature": 63.0,
+                    "ExcludeTemp": false,
+                    "ExcludeMotion": false,
+                    "OccupancySensitivity": "High",
+                    "OccupancyTimeout": 0,
+                    "Status": "Ok",
+                    "BatteryStatus": "Ok",
+                    "RssiAverage": -58,
+                    "PollutantLevels": [],
+                    "TemperatureActual": 62.742
+                  }
+                }
+              ],
+              "AvgTemperature": 63.0,
+              "AvgHumidity": 41.0
+            },
+            {
+              "Id": 3,
+              "Name": "**REDACTED**",
+              "Type": "Bedroom",
+              "OverallMotion": false,
+              "Accessories": [
+                {
+                  "AccessoryId": 4,
+                  "AccessoryAttribute": {
+                    "Type": "IndoorAirSensor",
+                    "ConnectionMethod": "RL",
+                    "Name": "**REDACTED**",
+                    "UserChangeEnable": false,
+                    "Model": "4354",
+                    "SerialNumber": "**REDACTED**",
+                    "SoftwareRevision": "2.1.5.0",
+                    "HardwareRevision": "tus"
+                  },
+                  "AccessoryValue": {
+                    "IndoorHumidity": 38,
+                    "MotionDet": false,
+                    "OccupancyDet": false,
+                    "IndoorTemperature": 76.0,
+                    "ExcludeTemp": false,
+                    "ExcludeMotion": false,
+                    "OccupancySensitivity": "Medium",
+                    "OccupancyTimeout": 0,
+                    "Status": "Ok",
+                    "BatteryStatus": "Ok",
+                    "RssiAverage": -59,
+                    "PollutantLevels": [],
+                    "TemperatureActual": 75.563
+                  }
+                }
+              ],
+              "AvgTemperature": 76.0,
+              "AvgHumidity": 38.0
+            },
+            {
+              "Id": 4,
+              "Name": "**REDACTED**",
+              "Type": "Bedroom",
+              "OverallMotion": false,
+              "Accessories": [
+                {
+                  "AccessoryId": 5,
+                  "AccessoryAttribute": {
+                    "Type": "IndoorAirSensor",
+                    "ConnectionMethod": "RL",
+                    "Name": "**REDACTED**",
+                    "UserChangeEnable": false,
+                    "Model": "4354",
+                    "SerialNumber": "**REDACTED**",
+                    "SoftwareRevision": "2.1.5.0",
+                    "HardwareRevision": "tus"
+                  },
+                  "AccessoryValue": {
+                    "IndoorHumidity": 35,
+                    "MotionDet": false,
+                    "OccupancyDet": false,
+                    "IndoorTemperature": 78.0,
+                    "ExcludeTemp": false,
+                    "ExcludeMotion": false,
+                    "OccupancySensitivity": "Medium",
+                    "OccupancyTimeout": 0,
+                    "Status": "Ok",
+                    "BatteryStatus": "Ok",
+                    "RssiAverage": -59,
+                    "PollutantLevels": [],
+                    "TemperatureActual": 77.539
+                  }
+                }
+              ],
+              "AvgTemperature": 78.0,
+              "AvgHumidity": 35.0
+            },
+            {
+              "Id": 5,
+              "Name": "**REDACTED**",
+              "Type": "Bedroom",
+              "OverallMotion": false,
+              "Accessories": [
+                {
+                  "AccessoryId": 6,
+                  "AccessoryAttribute": {
+                    "Type": "IndoorAirSensor",
+                    "ConnectionMethod": "RL",
+                    "Name": "**REDACTED**",
+                    "UserChangeEnable": false,
+                    "Model": "4354",
+                    "SerialNumber": "**REDACTED**",
+                    "SoftwareRevision": "2.1.5.0",
+                    "HardwareRevision": "tus"
+                  },
+                  "AccessoryValue": {
+                    "IndoorHumidity": 33,
+                    "MotionDet": false,
+                    "OccupancyDet": false,
+                    "IndoorTemperature": 79.0,
+                    "ExcludeTemp": false,
+                    "ExcludeMotion": false,
+                    "OccupancySensitivity": "Medium",
+                    "OccupancyTimeout": 0,
+                    "Status": "Ok",
+                    "BatteryStatus": "Ok",
+                    "RssiAverage": -58,
+                    "PollutantLevels": [],
+                    "TemperatureActual": 79.484
+                  }
+                }
+              ],
+              "AvgTemperature": 79.0,
+              "AvgHumidity": 33.0
+            },
+            {
+              "Id": 6,
+              "Name": "**REDACTED**",
+              "Type": "Bedroom",
+              "OverallMotion": false,
+              "Accessories": [
+                {
+                  "AccessoryId": 7,
+                  "AccessoryAttribute": {
+                    "Type": "IndoorAirSensor",
+                    "ConnectionMethod": "RL",
+                    "Name": "**REDACTED**",
+                    "UserChangeEnable": false,
+                    "Model": "4354",
+                    "SerialNumber": "**REDACTED**",
+                    "SoftwareRevision": "2.1.5.0",
+                    "HardwareRevision": "tus"
+                  },
+                  "AccessoryValue": {
+                    "IndoorHumidity": 46,
+                    "MotionDet": false,
+                    "OccupancyDet": false,
+                    "IndoorTemperature": 71.0,
+                    "ExcludeTemp": false,
+                    "ExcludeMotion": false,
+                    "OccupancySensitivity": "Medium",
+                    "OccupancyTimeout": 0,
+                    "Status": "Ok",
+                    "BatteryStatus": "Ok",
+                    "RssiAverage": -64,
+                    "PollutantLevels": [],
+                    "TemperatureActual": 70.5
+                  }
+                }
+              ],
+              "AvgTemperature": 71.0,
+              "AvgHumidity": 46.0
+            },
+            {
+              "Id": 7,
+              "Name": "**REDACTED**",
+              "Type": "Bedroom",
+              "OverallMotion": false,
+              "Accessories": [
+                {
+                  "AccessoryId": 8,
+                  "AccessoryAttribute": {
+                    "Type": "IndoorAirSensor",
+                    "ConnectionMethod": "RL",
+                    "Name": "**REDACTED**",
+                    "UserChangeEnable": false,
+                    "Model": "4354",
+                    "SerialNumber": "**REDACTED**",
+                    "SoftwareRevision": "2.1.5.0",
+                    "HardwareRevision": "tus"
+                  },
+                  "AccessoryValue": {
+                    "IndoorHumidity": 45,
+                    "MotionDet": false,
+                    "OccupancyDet": false,
+                    "IndoorTemperature": 70.0,
+                    "ExcludeTemp": false,
+                    "ExcludeMotion": false,
+                    "OccupancySensitivity": "Medium",
+                    "OccupancyTimeout": 0,
+                    "Status": "Ok",
+                    "BatteryStatus": "Ok",
+                    "RssiAverage": -71,
+                    "PollutantLevels": [],
+                    "TemperatureActual": 70.305
+                  }
+                }
+              ],
+              "AvgTemperature": 70.0,
+              "AvgHumidity": 45.0
+            },
+            {
+              "Id": 8,
+              "Name": "**REDACTED**",
+              "Type": "Bedroom",
+              "OverallMotion": false,
+              "Accessories": [
+                {
+                  "AccessoryId": 9,
+                  "AccessoryAttribute": {
+                    "Type": "IndoorAirSensor",
+                    "ConnectionMethod": "RL",
+                    "Name": "**REDACTED**",
+                    "UserChangeEnable": false,
+                    "Model": "4354",
+                    "SerialNumber": "**REDACTED**",
+                    "SoftwareRevision": "2.1.5.0",
+                    "HardwareRevision": "tus"
+                  },
+                  "AccessoryValue": {
+                    "IndoorHumidity": 31,
+                    "MotionDet": false,
+                    "OccupancyDet": false,
+                    "IndoorTemperature": 81.0,
+                    "ExcludeTemp": false,
+                    "ExcludeMotion": false,
+                    "OccupancySensitivity": "Medium",
+                    "OccupancyTimeout": 0,
+                    "Status": "Ok",
+                    "BatteryStatus": "Ok",
+                    "RssiAverage": -62,
+                    "PollutantLevels": [],
+                    "TemperatureActual": 81.305
+                  }
+                }
+              ],
+              "AvgTemperature": 81.0,
+              "AvgHumidity": 31.0
+            },
+            {
+              "Id": 9,
+              "Name": "**REDACTED**",
+              "Type": "Bedroom",
+              "OverallMotion": false,
+              "Accessories": [
+                {
+                  "AccessoryId": 10,
+                  "AccessoryAttribute": {
+                    "Type": "IndoorAirSensor",
+                    "ConnectionMethod": "RL",
+                    "Name": "**REDACTED**",
+                    "UserChangeEnable": false,
+                    "Model": "4354",
+                    "SerialNumber": "**REDACTED**",
+                    "SoftwareRevision": "2.1.5.0",
+                    "HardwareRevision": "tus"
+                  },
+                  "AccessoryValue": {
+                    "IndoorHumidity": 36,
+                    "MotionDet": false,
+                    "OccupancyDet": false,
+                    "IndoorTemperature": 77.0,
+                    "ExcludeTemp": false,
+                    "ExcludeMotion": false,
+                    "OccupancySensitivity": "Medium",
+                    "OccupancyTimeout": 0,
+                    "Status": "Ok",
+                    "BatteryStatus": "Ok",
+                    "RssiAverage": -62,
+                    "PollutantLevels": [],
+                    "TemperatureActual": 77.398
+                  }
+                }
+              ],
+              "AvgTemperature": 77.0,
+              "AvgHumidity": 36.0
+            },
+            {
+              "Id": 10,
+              "Name": "**REDACTED**",
+              "Type": "Bedroom",
+              "OverallMotion": false,
+              "Accessories": [
+                {
+                  "AccessoryId": 11,
+                  "AccessoryAttribute": {
+                    "Type": "IndoorAirSensor",
+                    "ConnectionMethod": "RL",
+                    "Name": "**REDACTED**",
+                    "UserChangeEnable": false,
+                    "Model": "4354",
+                    "SerialNumber": "**REDACTED**",
+                    "SoftwareRevision": "2.1.5.0",
+                    "HardwareRevision": "tus"
+                  },
+                  "AccessoryValue": {
+                    "IndoorHumidity": 33,
+                    "MotionDet": false,
+                    "OccupancyDet": false,
+                    "IndoorTemperature": 80.0,
+                    "ExcludeTemp": false,
+                    "ExcludeMotion": false,
+                    "OccupancySensitivity": "Medium",
+                    "OccupancyTimeout": 0,
+                    "Status": "Ok",
+                    "BatteryStatus": "Ok",
+                    "RssiAverage": -54,
+                    "PollutantLevels": [],
+                    "TemperatureActual": 79.734
+                  }
+                }
+              ],
+              "AvgTemperature": 80.0,
+              "AvgHumidity": 33.0
+            },
+            {
+              "Id": 11,
+              "Name": "**REDACTED**",
+              "Type": "Bedroom",
+              "OverallMotion": false,
+              "Accessories": [
+                {
+                  "AccessoryId": 12,
+                  "AccessoryAttribute": {
+                    "Type": "IndoorAirSensor",
+                    "ConnectionMethod": "RL",
+                    "Name": "**REDACTED**",
+                    "UserChangeEnable": false,
+                    "Model": "4354",
+                    "SerialNumber": "**REDACTED**",
+                    "SoftwareRevision": "2.1.5.0",
+                    "HardwareRevision": "tus"
+                  },
+                  "AccessoryValue": {
+                    "IndoorHumidity": 37,
+                    "MotionDet": false,
+                    "OccupancyDet": false,
+                    "IndoorTemperature": 76.0,
+                    "ExcludeTemp": false,
+                    "ExcludeMotion": false,
+                    "OccupancySensitivity": "Medium",
+                    "OccupancyTimeout": 0,
+                    "Status": "Ok",
+                    "BatteryStatus": "Ok",
+                    "RssiAverage": -66,
+                    "PollutantLevels": [],
+                    "TemperatureActual": 75.633
+                  }
+                }
+              ],
+              "AvgTemperature": 76.0,
+              "AvgHumidity": 37.0
+            }
+          ]
+        },
+        "configuration": {
+          "DeviceId": "**REDACTED**",
+          "Reported": {
+            "FanSwitchCapabilities": {
+              "Positions": [
+                "On",
+                "Auto",
+                "Circulate"
+              ],
+              "MaxSpeed": 1
+            },
+            "SystemSwitchCapabilities": [
+              "EmergencyHeat",
+              "Heat",
+              "Off",
+              "Cool",
+              "Auto"
+            ],
+            "DehumidifierEnabled": true,
+            "DehumidificationMaximumSetpoint": 100,
+            "DehumidificationMinimumSetpoint": 10,
+            "HumidifierDeadbandEnabled": true,
+            "HumidifierDeadband": 15,
+            "HumidifierEnabled": true,
+            "HumidificationMaximumSetpoint": 90,
+            "HumidificationMinimumSetpoint": 0,
+            "MinimumCoolSetpointAllowed": 50.0,
+            "MaximumCoolSetpointAllowed": 90.0,
+            "MinimumHeatSetpointAllowed": 50.0,
+            "MaximumHeatSetpointAllowed": 90.0,
+            "SetpointDeadband": 0.0,
+            "CommercialConfiguration": false,
+            "BackLightIntensity": 10,
+            "MaximumBackLightIntensity": 10,
+            "MinimumBackLightIntensity": 0,
+            "AllowedAdaptiveRecoveryModes": [
+              "None",
+              "AdaptiveIntelligentRecovery"
+            ],
+            "TemperatureUnits": "F",
+            "SupportedCapabilities": [
+              "AccessoryValues",
+              "AirFilterTimer",
+              "BackLight",
+              "DuctTemperature",
+              "Dehumidification",
+              "DehumidificationTimer",
+              "Fan",
+              "FeelsLike",
+              "FaultThresholds",
+              "Humidification",
+              "Groups",
+              "Matter",
+              "Rooms",
+              "PeriodNames",
+              "AdaptiveIntellegentRecovery",
+              "SensorSchedule",
+              "SetUpConfiguration",
+              "StreamStart",
+              "VentilationBoostTimer",
+              "VentilationTimer",
+              "StageConfigurationIndoorAirQuality",
+              "DehumAway",
+              "FreezeProtection",
+              "IndoorAirQuality",
+              "AwayModeOverride",
+              "TemperatureControl",
+              "RemoteChangeAllowedSetpoint",
+              "RemoteChangeActivatableBackLightIntensity",
+              "AutoCapableBackLightIntensity"
+            ],
+            "ScheduleCapabilities": {
+              "AvailableScheduleTypes": [
+                "None",
+                "Geofenced",
+                "GeofencedWithSleep",
+                "TimedNorthAmerica"
+              ],
+              "SchedulableFan": true,
+              "SchedulableSysSwitchOff": false
+            },
+            "AllowedTimeIncrements": 15,
+            "SystemConfiguration": {
+              "HeatingSystem": "CompressorHeat",
+              "HeatingStages": 3,
+              "CoolingSystem": "CompressorCool",
+              "CoolingStages": 2
+            },
+            "MaximumAllowedRoomsPerGroup": 20,
+            "MaximumGroupsPerGroupOfGroupsAllowed": 15,
+            "MaximumAllowedRooms": 20,
+            "MaximumAccessoriesPerRoom": 4,
+            "MaximumAllowedGroups": 1,
+            "HumidityHidden": false,
+            "StageConfigurationIndoorAirQuality": {
+              "Humidifier": true,
+              "Dehumidifier": true,
+              "Ventilator": false
+            },
+            "FreezeProtection": {
+              "Configured": true,
+              "Active": false,
+              "LowLimitDegrees": 50
+            },
+            "TemperatureUnitsWritable": false,
+            "Backlight": {
+              "Active": 10,
+              "Inactive": 10,
+              "RemoteChangeIndication": true,
+              "AutoBacklightLevel": true,
+              "AutoLevel": 5
+            },
+            "BacklightCapability": {
+              "Active": {
+                "Minimum": 1,
+                "Maximum": 10
+              },
+              "Inactive": {
+                "Minimum": 0,
+                "Maximum": 10
+              }
+            },
+            "AirFilterReminders": {
+              "1": {
+                "IsCalendarDays": true,
+                "IsReminderEnabled": true,
+                "RestartDays": 90
+              }
+            },
+            "Matter": {
+              "CommissioningStatus": "Commissioned",
+              "VendorId": 4890,
+              "ProductId": 4416,
+              "CustomFlowFlag": 1,
+              "DiscoveryCapabilitiesBitmask": 4,
+              "DiscriminatorValue": "**REDACTED**",
+              "Fabrics": [
+                {
+                  "VendorId": 24582,
+                  "Label": "**REDACTED**"
+                },
+                {
+                  "VendorId": 4939,
+                  "Label": "**REDACTED**"
+                }
+              ]
+            },
+            "DisplayConfiguration": {
+              "IdleScreenConfiguration": {
+                "MaximumAllowedSetting": 9,
+                "CurrentSetting": 6,
+                "MaximumAllowedColorSetting": 7,
+                "CurrentColorSetting": 10,
+                "MotionTriggerToHomeScreen": false
+              }
+            },
+            "AwayModeOverride": false,
+            "DealerInformation": "**REDACTED**",
+            "FaultThresholds": {
+              "TemperatureHighThreshold": 90.0,
+              "TemperatureLowThreshold": 50.0,
+              "HumidityHighThreshold": 75,
+              "HumidityLowThreshold": 20,
+              "ZoneEnablesTemperature": {},
+              "ZoneEnablesHumidity": {}
+            }
+          },
+          "Desired": {}
+        },
+        "priority": {
+          "DeviceId": "**REDACTED**",
+          "PriorityStatus": "PermanentHold",
+          "Priority": {
+            "PriorityType": "PickARoom",
+            "SelectedRooms": [
+              0,
+              1,
+              3,
+              4,
+              5,
+              8,
+              9,
+              10,
+              11
+            ],
+            "Rooms": [
+              {
+                "Id": 0,
+                "Name": "**REDACTED**",
+                "AvgTemperature": 76.0,
+                "AvgHumidity": 39.0,
+                "OverallMotion": true,
+                "Accessories": [
+                  {
+                    "Id": 0,
+                    "SensorType": "Thermostat",
+                    "ExcludeMotion": false,
+                    "Temperature": 76.0,
+                    "Status": "Ok",
+                    "DetectMotion": true
+                  },
+                  {
+                    "Id": 1,
+                    "SensorType": "EquipmentInterfaceModule",
+                    "Status": "Ok"
+                  }
+                ]
+              },
+              {
+                "Id": 1,
+                "Name": "**REDACTED**",
+                "AvgTemperature": 78.0,
+                "AvgHumidity": 36.0,
+                "OverallMotion": true,
+                "Accessories": [
+                  {
+                    "Id": 2,
+                    "SensorType": "IndoorAirSensor",
+                    "ExcludeTemperature": false,
+                    "ExcludeMotion": false,
+                    "Temperature": 78.0,
+                    "Status": "Ok",
+                    "DetectMotion": true
+                  }
+                ]
+              },
+              {
+                "Id": 2,
+                "Name": "**REDACTED**",
+                "AvgTemperature": 63.0,
+                "AvgHumidity": 41.0,
+                "OverallMotion": false,
+                "Accessories": [
+                  {
+                    "Id": 3,
+                    "SensorType": "IndoorAirSensor",
+                    "ExcludeTemperature": false,
+                    "ExcludeMotion": false,
+                    "Temperature": 63.0,
+                    "Status": "Ok",
+                    "DetectMotion": false
+                  }
+                ]
+              },
+              {
+                "Id": 3,
+                "Name": "**REDACTED**",
+                "AvgTemperature": 76.0,
+                "AvgHumidity": 38.0,
+                "OverallMotion": false,
+                "Accessories": [
+                  {
+                    "Id": 4,
+                    "SensorType": "IndoorAirSensor",
+                    "ExcludeTemperature": false,
+                    "ExcludeMotion": false,
+                    "Temperature": 76.0,
+                    "Status": "Ok",
+                    "DetectMotion": false
+                  }
+                ]
+              },
+              {
+                "Id": 4,
+                "Name": "**REDACTED**",
+                "AvgTemperature": 78.0,
+                "AvgHumidity": 35.0,
+                "OverallMotion": false,
+                "Accessories": [
+                  {
+                    "Id": 5,
+                    "SensorType": "IndoorAirSensor",
+                    "ExcludeTemperature": false,
+                    "ExcludeMotion": false,
+                    "Temperature": 78.0,
+                    "Status": "Ok",
+                    "DetectMotion": false
+                  }
+                ]
+              },
+              {
+                "Id": 5,
+                "Name": "**REDACTED**",
+                "AvgTemperature": 79.0,
+                "AvgHumidity": 33.0,
+                "OverallMotion": false,
+                "Accessories": [
+                  {
+                    "Id": 6,
+                    "SensorType": "IndoorAirSensor",
+                    "ExcludeTemperature": false,
+                    "ExcludeMotion": false,
+                    "Temperature": 79.0,
+                    "Status": "Ok",
+                    "DetectMotion": false
+                  }
+                ]
+              },
+              {
+                "Id": 6,
+                "Name": "**REDACTED**",
+                "AvgTemperature": 71.0,
+                "AvgHumidity": 46.0,
+                "OverallMotion": false,
+                "Accessories": [
+                  {
+                    "Id": 7,
+                    "SensorType": "IndoorAirSensor",
+                    "ExcludeTemperature": false,
+                    "ExcludeMotion": false,
+                    "Temperature": 71.0,
+                    "Status": "Ok",
+                    "DetectMotion": false
+                  }
+                ]
+              },
+              {
+                "Id": 7,
+                "Name": "**REDACTED**",
+                "AvgTemperature": 70.0,
+                "AvgHumidity": 45.0,
+                "OverallMotion": false,
+                "Accessories": [
+                  {
+                    "Id": 8,
+                    "SensorType": "IndoorAirSensor",
+                    "ExcludeTemperature": false,
+                    "ExcludeMotion": false,
+                    "Temperature": 70.0,
+                    "Status": "Ok",
+                    "DetectMotion": false
+                  }
+                ]
+              },
+              {
+                "Id": 8,
+                "Name": "**REDACTED**",
+                "AvgTemperature": 81.0,
+                "AvgHumidity": 31.0,
+                "OverallMotion": false,
+                "Accessories": [
+                  {
+                    "Id": 9,
+                    "SensorType": "IndoorAirSensor",
+                    "ExcludeTemperature": false,
+                    "ExcludeMotion": false,
+                    "Temperature": 81.0,
+                    "Status": "Ok",
+                    "DetectMotion": false
+                  }
+                ]
+              },
+              {
+                "Id": 9,
+                "Name": "**REDACTED**",
+                "AvgTemperature": 77.0,
+                "AvgHumidity": 36.0,
+                "OverallMotion": false,
+                "Accessories": [
+                  {
+                    "Id": 10,
+                    "SensorType": "IndoorAirSensor",
+                    "ExcludeTemperature": false,
+                    "ExcludeMotion": false,
+                    "Temperature": 77.0,
+                    "Status": "Ok",
+                    "DetectMotion": false
+                  }
+                ]
+              },
+              {
+                "Id": 10,
+                "Name": "**REDACTED**",
+                "AvgTemperature": 80.0,
+                "AvgHumidity": 33.0,
+                "OverallMotion": false,
+                "Accessories": [
+                  {
+                    "Id": 11,
+                    "SensorType": "IndoorAirSensor",
+                    "ExcludeTemperature": false,
+                    "ExcludeMotion": false,
+                    "Temperature": 80.0,
+                    "Status": "Ok",
+                    "DetectMotion": false
+                  }
+                ]
+              },
+              {
+                "Id": 11,
+                "Name": "**REDACTED**",
+                "AvgTemperature": 76.0,
+                "AvgHumidity": 37.0,
+                "OverallMotion": false,
+                "Accessories": [
+                  {
+                    "Id": 12,
+                    "SensorType": "IndoorAirSensor",
+                    "ExcludeTemperature": false,
+                    "ExcludeMotion": false,
+                    "Temperature": 76.0,
+                    "Status": "Ok",
+                    "DetectMotion": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "pushes": {
+          "DisplayedIndoorHumidity": {
+            "merged_in_memory": true,
+            "count": 2,
+            "first_seen": "2026-11-20T22:20:25.330+00:00",
+            "last_seen": "2026-11-20T22:21:25.422+00:00",
+            "shapes": [
+              {
+                "count": 2,
+                "samples": [
+                  {
+                    "at": "2026-11-20T22:21:25.422+00:00",
+                    "value": {
+                      "Value": 35,
+                      "Sensor": "Ok"
+                    }
+                  },
+                  {
+                    "at": "2026-11-20T22:20:25.330+00:00",
+                    "value": {
+                      "Value": 36,
+                      "Sensor": "Ok"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "Rooms": {
+            "merged_in_memory": true,
+            "count": 7,
+            "first_seen": "2026-11-20T22:19:40.262+00:00",
+            "last_seen": "2026-11-20T22:25:25.234+00:00",
+            "shapes": [
+              {
+                "count": 7,
+                "samples": [
+                  {
+                    "at": "2026-11-20T22:25:25.234+00:00",
+                    "value": {
+                      "PropertyName": "5",
+                      "Value": {
+                        "Id": 5,
+                        "Name": "**REDACTED**",
+                        "Type": "Bedroom",
+                        "AccessorySource": [
+                          6
+                        ],
+                        "AvgTemperature": 79,
+                        "AvgHumidity": 33,
+                        "OverallMotion": false
+                      }
+                    }
+                  },
+                  {
+                    "at": "2026-11-20T22:24:25.495+00:00",
+                    "value": {
+                      "PropertyName": "5",
+                      "Value": {
+                        "Id": 5,
+                        "Name": "**REDACTED**",
+                        "Type": "Bedroom",
+                        "AccessorySource": [
+                          6
+                        ],
+                        "AvgTemperature": 80,
+                        "AvgHumidity": 33,
+                        "OverallMotion": false
+                      }
+                    }
+                  },
+                  {
+                    "at": "2026-11-20T22:23:25.231+00:00",
+                    "value": {
+                      "PropertyName": "5",
+                      "Value": {
+                        "Id": 5,
+                        "Name": "**REDACTED**",
+                        "Type": "Bedroom",
+                        "AccessorySource": [
+                          6
+                        ],
+                        "AvgTemperature": 79,
+                        "AvgHumidity": 33,
+                        "OverallMotion": false
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "Sensor": {
+            "merged_in_memory": true,
+            "count": 109,
+            "first_seen": "2026-11-20T22:16:34.465+00:00",
+            "last_seen": "2026-11-20T22:25:35.639+00:00",
+            "shapes": [
+              {
+                "count": 96,
+                "samples": [
+                  {
+                    "at": "2026-11-20T22:25:35.639+00:00",
+                    "value": {
+                      "RoomId": 0,
+                      "AccessoryId": 0,
+                      "AccessoryAttribute": {
+                        "Id": 0,
+                        "Type": "TS",
+                        "ConnectionMethod": "WI",
+                        "Name": "**REDACTED**",
+                        "UserChangeEnable": false,
+                        "Model": "Unknown OS",
+                        "SerialNumber": "**REDACTED**",
+                        "SoftwareRevision": "01.3605.740",
+                        "HardwareRevision": "DENALI_TSTAT-001"
+                      },
+                      "AccessoryValue": {
+                        "Id": 0,
+                        "IndoorHumidity": 36,
+                        "MotionDet": true,
+                        "OccupancyDet": true,
+                        "IndoorTemperature": 78,
+                        "Identify": false,
+                        "ExcludeTemp": false,
+                        "ExcludeMotion": false,
+                        "OccupancySensitivity": "High",
+                        "OccupancyTimeout": 0,
+                        "Status": "Ok",
+                        "BatteryStatus": "Ok",
+                        "RssiAverage": -42,
+                        "PollutantLevels": []
+                      }
+                    }
+                  },
+                  {
+                    "at": "2026-11-20T22:25:25.919+00:00",
+                    "value": {
+                      "RoomId": 8,
+                      "AccessoryId": 9,
+                      "AccessoryAttribute": {
+                        "Id": 7,
+                        "Type": "IS",
+                        "ConnectionMethod": "RL",
+                        "Name": "**REDACTED**",
+                        "UserChangeEnable": false,
+                        "Model": "4354",
+                        "SerialNumber": "**REDACTED**",
+                        "SoftwareRevision": "2.1.5.0",
+                        "HardwareRevision": "tus"
+                      },
+                      "AccessoryValue": {
+                        "Id": 9,
+                        "IndoorHumidity": 33,
+                        "MotionDet": false,
+                        "OccupancyDet": false,
+                        "IndoorTemperature": 80,
+                        "Identify": false,
+                        "ExcludeTemp": false,
+                        "ExcludeMotion": false,
+                        "OccupancySensitivity": "Medium",
+                        "OccupancyTimeout": 0,
+                        "Status": "Ok",
+                        "BatteryStatus": "Ok",
+                        "RssiAverage": -54,
+                        "PollutantLevels": []
+                      }
+                    }
+                  },
+                  {
+                    "at": "2026-11-20T22:25:25.901+00:00",
+                    "value": {
+                      "RoomId": 6,
+                      "AccessoryId": 7,
+                      "AccessoryAttribute": {
+                        "Id": 5,
+                        "Type": "IS",
+                        "ConnectionMethod": "RL",
+                        "Name": "**REDACTED**",
+                        "UserChangeEnable": false,
+                        "Model": "4354",
+                        "SerialNumber": "**REDACTED**",
+                        "SoftwareRevision": "2.1.5.0",
+                        "HardwareRevision": "tus"
+                      },
+                      "AccessoryValue": {
+                        "Id": 7,
+                        "IndoorHumidity": 31,
+                        "MotionDet": false,
+                        "OccupancyDet": false,
+                        "IndoorTemperature": 81,
+                        "Identify": false,
+                        "ExcludeTemp": false,
+                        "ExcludeMotion": false,
+                        "OccupancySensitivity": "Medium",
+                        "OccupancyTimeout": 0,
+                        "Status": "Ok",
+                        "BatteryStatus": "Ok",
+                        "RssiAverage": -62,
+                        "PollutantLevels": []
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "count": 13,
+                "samples": [
+                  {
+                    "at": "2026-11-20T22:25:33.320+00:00",
+                    "value": {
+                      "RoomId": 0,
+                      "AccessoryId": 0,
+                      "AccessoryAttribute": {
+                        "Id": 0,
+                        "Type": "TS",
+                        "ConnectionMethod": "WI",
+                        "Name": "**REDACTED**",
+                        "UserChangeEnable": false,
+                        "Model": "Unknown OS",
+                        "SerialNumber": "**REDACTED**",
+                        "SoftwareRevision": "01.3605.740",
+                        "HardwareRevision": "DENALI_TSTAT-001"
+                      },
+                      "AccessoryValue": {
+                        "Id": 0,
+                        "IndoorHumidity": 39,
+                        "MotionDet": true,
+                        "OccupancyDet": true,
+                        "IndoorTemperature": 76,
+                        "ExcludeMotion": false,
+                        "Status": "Ok",
+                        "RssiAverage": -62,
+                        "PollutantLevels": [],
+                        "TotalVolatileOrganicCompounds": {
+                          "Measurement": 1
+                        },
+                        "CarbonDioxide": {
+                          "Measurement": 407
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "at": "2026-11-20T22:25:25.155+00:00",
+                    "value": {
+                      "RoomId": 0,
+                      "AccessoryId": 0,
+                      "AccessoryAttribute": {
+                        "Id": 0,
+                        "Type": "TS",
+                        "ConnectionMethod": "WI",
+                        "Name": "**REDACTED**",
+                        "UserChangeEnable": false,
+                        "Model": "Unknown OS",
+                        "SerialNumber": "**REDACTED**",
+                        "SoftwareRevision": "01.3605.740",
+                        "HardwareRevision": "DENALI_TSTAT-001"
+                      },
+                      "AccessoryValue": {
+                        "Id": 0,
+                        "IndoorHumidity": 39,
+                        "MotionDet": true,
+                        "OccupancyDet": true,
+                        "IndoorTemperature": 76,
+                        "ExcludeMotion": false,
+                        "Status": "Ok",
+                        "RssiAverage": -62,
+                        "PollutantLevels": [],
+                        "TotalVolatileOrganicCompounds": {
+                          "Measurement": 1
+                        },
+                        "CarbonDioxide": {
+                          "Measurement": 407
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "at": "2026-11-20T22:24:25.529+00:00",
+                    "value": {
+                      "RoomId": 0,
+                      "AccessoryId": 0,
+                      "AccessoryAttribute": {
+                        "Id": 0,
+                        "Type": "TS",
+                        "ConnectionMethod": "WI",
+                        "Name": "**REDACTED**",
+                        "UserChangeEnable": false,
+                        "Model": "Unknown OS",
+                        "SerialNumber": "**REDACTED**",
+                        "SoftwareRevision": "01.3605.740",
+                        "HardwareRevision": "DENALI_TSTAT-001"
+                      },
+                      "AccessoryValue": {
+                        "Id": 0,
+                        "IndoorHumidity": 39,
+                        "MotionDet": true,
+                        "OccupancyDet": true,
+                        "IndoorTemperature": 76,
+                        "ExcludeMotion": false,
+                        "Status": "Ok",
+                        "RssiAverage": -62,
+                        "PollutantLevels": [],
+                        "TotalVolatileOrganicCompounds": {
+                          "Measurement": 1
+                        },
+                        "CarbonDioxide": {
+                          "Measurement": 407
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "Setpoint": {
+            "merged_in_memory": true,
+            "count": 2,
+            "first_seen": "2026-11-20T22:20:19.823+00:00",
+            "last_seen": "2026-11-20T22:20:28.337+00:00",
+            "shapes": [
+              {
+                "count": 2,
+                "samples": [
+                  {
+                    "at": "2026-11-20T22:20:28.337+00:00",
+                    "value": {
+                      "Status": "PermanentHold",
+                      "HeatSetpoint": 70,
+                      "CoolSetpoint": 74,
+                      "FanSwitch": {
+                        "Position": "Auto"
+                      },
+                      "Priority": {
+                        "PriorityType": "PickARoom",
+                        "SelectedRooms": [
+                          0,
+                          1,
+                          3,
+                          4,
+                          5,
+                          8,
+                          9,
+                          10,
+                          11
+                        ]
+                      },
+                      "EndPriority": {
+                        "PriorityType": "PickARoom"
+                      },
+                      "DevicePreferredTemperatureUnits": "F"
+                    }
+                  },
+                  {
+                    "at": "2026-11-20T22:20:19.823+00:00",
+                    "value": {
+                      "Status": "PermanentHold",
+                      "HeatSetpoint": 70,
+                      "CoolSetpoint": 74,
+                      "FanSwitch": {
+                        "Position": "Auto"
+                      },
+                      "Priority": {
+                        "PriorityType": "PickARoom",
+                        "SelectedRooms": [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          8,
+                          9,
+                          10,
+                          11
+                        ]
+                      },
+                      "EndPriority": {
+                        "PriorityType": "PickARoom"
+                      },
+                      "DevicePreferredTemperatureUnits": "F"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "writes": [
+          {
+            "at": "2026-11-20T22:20:03.669+00:00",
+            "command": "humidifier/setpoint",
+            "body": {
+              "SetPointValue": 42,
+              "ChannelId": "ds-notification-service"
+            },
+            "error": {
+              "type": "ResideoApiError",
+              "message": "PUT https://api.ha.resideo.com/ris-public-api/api/v1/devices/thermostats/**REDACTED**/humidifier/setpoint -> 400 ([{'ErrorCode': 'InvalidInput', 'Message': 'Setpoint value must be multiple of 5.', 'ParamName': 'SetPointValue'}])",
+              "status": 400,
+              "response": [
+                {
+                  "ErrorCode": "InvalidInput",
+                  "Message": "Setpoint value must be multiple of 5.",
+                  "ParamName": "**REDACTED**"
+                }
+              ]
+            }
+          },
+          {
+            "at": "2026-11-20T22:20:16.997+00:00",
+            "command": "humidifier/setpoint",
+            "body": {
+              "SetPointValue": 45,
+              "ChannelId": "ds-notification-service"
+            },
+            "result": {
+              "TransactionId": "5eeF7G1cza3_HVuP"
+            },
+            "confirmation": {
+              "at": "2026-11-20T22:20:17.801+00:00",
+              "change": "changeHumiditySetpoint",
+              "direction": "AppInitiated",
+              "success": true
+            }
+          },
+          {
+            "at": "2026-11-20T22:20:17.223+00:00",
+            "command": "dehumidifier/setpoint",
+            "body": {
+              "SetPointValue": 55,
+              "ChannelId": "ds-notification-service"
+            },
+            "result": {
+              "TransactionId": "LBbrE-iNCfQhzlru"
+            },
+            "confirmation": {
+              "at": "2026-11-20T22:20:19.336+00:00",
+              "change": "changeDehumiditySetpoint",
+              "direction": "AppInitiated",
+              "success": true
+            }
+          },
+          {
+            "at": "2026-11-20T22:20:17.447+00:00",
+            "command": "priority",
+            "body": {
+              "PriorityStatus": "PermanentHold",
+              "CurrentPriority": {
+                "PriorityType": "PickARoom",
+                "SelectedRooms": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  8,
+                  9,
+                  10,
+                  11
+                ],
+                "Rooms": null
+              },
+              "ChannelId": "ds-notification-service"
+            },
+            "result": {
+              "TransactionId": "xm2OMCcwwjU0WOiV"
+            },
+            "confirmation": {
+              "at": "2026-11-20T22:20:20.639+00:00",
+              "change": "changeSetpoint",
+              "direction": "AppInitiated",
+              "success": true
+            }
+          },
+          {
+            "at": "2026-11-20T22:20:25.690+00:00",
+            "command": "humidifier/setpoint",
+            "body": {
+              "SetPointValue": 40,
+              "ChannelId": "ds-notification-service"
+            },
+            "result": {
+              "TransactionId": "0VfpCLPdhylXm9Fq"
+            },
+            "confirmation": {
+              "at": "2026-11-20T22:20:26.360+00:00",
+              "change": "changeHumiditySetpoint",
+              "direction": "AppInitiated",
+              "success": true
+            }
+          },
+          {
+            "at": "2026-11-20T22:20:25.910+00:00",
+            "command": "dehumidifier/setpoint",
+            "body": {
+              "SetPointValue": 60,
+              "ChannelId": "ds-notification-service"
+            },
+            "result": {
+              "TransactionId": "0uv83K6MzdhdhBue"
+            },
+            "confirmation": {
+              "at": "2026-11-20T22:20:27.146+00:00",
+              "change": "changeDehumiditySetpoint",
+              "direction": "AppInitiated",
+              "success": true
+            }
+          },
+          {
+            "at": "2026-11-20T22:20:26.125+00:00",
+            "command": "priority",
+            "body": {
+              "PriorityStatus": "PermanentHold",
+              "CurrentPriority": {
+                "PriorityType": "PickARoom",
+                "SelectedRooms": [
+                  0,
+                  1,
+                  3,
+                  4,
+                  5,
+                  8,
+                  9,
+                  10,
+                  11
+                ],
+                "Rooms": null
+              },
+              "ChannelId": "ds-notification-service"
+            },
+            "result": {
+              "TransactionId": "ctghG1S8_vIuVz9x"
+            },
+            "confirmation": {
+              "at": "2026-11-20T22:20:28.836+00:00",
+              "change": "changeSetpoint",
+              "direction": "AppInitiated",
+              "success": true
+            }
+          },
+          {
+            "at": "2026-11-20T22:25:13.439+00:00",
+            "command": "humidifier/setpoint",
+            "body": {
+              "SetPointValue": 25,
+              "ChannelId": "ds-notification-service"
+            },
+            "result": {
+              "TransactionId": "_QzutCqJALBQDd3Q"
+            },
+            "confirmation": {
+              "at": "2026-11-20T22:25:14.288+00:00",
+              "change": "changeHumiditySetpoint",
+              "direction": "AppInitiated",
+              "success": true
+            }
+          },
+          {
+            "at": "2026-11-20T22:25:28.020+00:00",
+            "command": "humidifier/setpoint",
+            "body": {
+              "SetPointValue": 40,
+              "ChannelId": "ds-notification-service"
+            },
+            "result": {
+              "TransactionId": "F8Xe0CyiNOXPLE6C"
+            },
+            "confirmation": {
+              "at": "2026-11-20T22:25:29.142+00:00",
+              "change": "changeHumiditySetpoint",
+              "direction": "AppInitiated",
+              "success": true
+            }
+          },
+          {
+            "at": "2026-11-20T22:25:28.116+00:00",
+            "command": "priority",
+            "body": {
+              "PriorityStatus": "PermanentHold",
+              "CurrentPriority": {
+                "PriorityType": "FollowMe",
+                "SelectedRooms": [
+                  0,
+                  1,
+                  3,
+                  4,
+                  5,
+                  8,
+                  9,
+                  10,
+                  11
+                ],
+                "Rooms": null
+              },
+              "ChannelId": "ds-notification-service"
+            },
+            "error": {
+              "type": "ResideoApiError",
+              "message": "PUT https://api.ha.resideo.com/ris-public-api/api/v1/devices/thermostats/**REDACTED**/priority -> 400 ([{'ErrorCode': 'InvalidInput', 'Message': 'FollowMe is not valid with SelectedRooms', 'ParamName': 'FollowMe'}])",
+              "status": 400,
+              "response": [
+                {
+                  "ErrorCode": "InvalidInput",
+                  "Message": "FollowMe is not valid with SelectedRooms",
+                  "ParamName": "**REDACTED**"
+                }
+              ]
+            }
+          }
+        ],
+        "drift": {
+          "pushes_merged_since_read": 0,
+          "shadow": [],
+          "rooms": []
+        }
+      }
+    ]
+  },
+  "issues": []
+}
