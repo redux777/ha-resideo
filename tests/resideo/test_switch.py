@@ -147,7 +147,16 @@ async def test_room_priority_switches_and_mode_select(
     )
     await hass.async_block_till_done()
     third_call = mock_api.async_set_priority.await_args_list[2]
-    assert third_call.args == (MAC, "FollowMe", [0, 1])
+    assert third_call.args == (MAC, "FollowMe", None)
+
+    await hass.services.async_call(
+        "select",
+        "select_option",
+        {"entity_id": mode_sel, "option": "PickARoom"},
+    )
+    await hass.async_block_till_done()
+    fourth_call = mock_api.async_set_priority.await_args_list[3]
+    assert fourth_call.args == (MAC, "PickARoom", [0, 1])
 
 
 async def test_fan_mode_select(
