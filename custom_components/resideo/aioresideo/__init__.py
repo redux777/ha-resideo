@@ -150,7 +150,7 @@ class Resideo:
         return await self.client.set_hold(mac, status)
 
     async def async_set_priority(
-        self, mac: str, priority_type: str, rooms: list[int], **kw: Any
+        self, mac: str, priority_type: str, rooms: list[int] | None = None, **kw: Any
     ) -> dict[str, Any]:
         return await self.client.set_priority(mac, priority_type, rooms, **kw)
 

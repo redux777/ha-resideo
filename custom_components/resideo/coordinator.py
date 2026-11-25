@@ -39,6 +39,7 @@ from .aioresideo import (
     ResideoThermostat,
     apply_live_feed,
 )
+from .aioresideo.const import PRIORITY_FOLLOW_ME, PRIORITY_PICK_A_ROOM
 from .aioresideo.exceptions import (
     ResideoApiError,
     ResideoAuthError,
@@ -128,6 +129,9 @@ class ResideoDataUpdateCoordinator(DataUpdateCoordinator[dict[str, ResideoDevice
         # /priority also requires the full body (PriorityStatus, PriorityType, SelectedRooms),
         # while the mode select and per-room priority switches are separate entities.
         self._priority_overrides: dict[str, dict[str, Any]] = {}
+        # Remember the last non-empty SelectedRooms per thermostat so PickARoom -> FollowMe ->
+        # PickARoom restores the user's room selection even after FollowMe clears SelectedRooms.
+        self._last_selected_rooms: dict[str, list[int]] = {}
 
     async def _async_setup(self) -> None:
         """One-time discovery from the account graph: thermostats, SignalR targets, country."""
@@ -252,6 +256,8 @@ class ResideoDataUpdateCoordinator(DataUpdateCoordinator[dict[str, ResideoDevice
         except ResideoApiError as err:
             _LOGGER.debug("No priority for %s (%s)", mac, err)
             priority = ResideoPriority({})
+        if priority.selected_rooms:
+            self._last_selected_rooms[mac] = sorted(set(priority.selected_rooms))
         return ResideoDeviceData(
             thermostat=thermostat,
             rooms=rooms,
@@ -369,12 +375,23 @@ class ResideoDataUpdateCoordinator(DataUpdateCoordinator[dict[str, ResideoDevice
         priority: ResideoPriority,
         priority_type: str,
     ) -> dict[str, Any]:
-        """Set the thermostat's PriorityType ('PickARoom' or 'FollowMe'), preserving selected rooms."""
+        """Set the thermostat's PriorityType ('PickARoom' or 'FollowMe').
+
+        ``FollowMe`` rejects ``SelectedRooms`` with HTTP 400, so ``rooms`` is passed as ``None``
+        while stashing the last active room selection to restore when returning to ``PickARoom``.
+        """
         ov = self.priority_override(mac)
         had_prev = "priority_type" in ov
         prev = ov.get("priority_type")
+        current_selected = sorted(self.effective_selected_rooms(mac, priority))
+        if current_selected:
+            self._last_selected_rooms[mac] = current_selected
         ov["priority_type"] = priority_type
-        rooms_list = sorted(self.effective_selected_rooms(mac, priority)) or [0]
+        rooms_list: list[int] | None
+        if priority_type == PRIORITY_FOLLOW_ME:
+            rooms_list = None
+        else:
+            rooms_list = current_selected or self._last_selected_rooms.get(mac) or [0]
         status = priority.priority_status or "PermanentHold"
         try:
             return await self.api.async_set_priority(
@@ -394,11 +411,13 @@ class ResideoDataUpdateCoordinator(DataUpdateCoordinator[dict[str, ResideoDevice
         room_id: int,
         included: bool,
     ) -> dict[str, Any]:
-        """Include or exclude one room from SelectedRooms, preserving PriorityType and other rooms."""
+        """Include or exclude one room from SelectedRooms, preserving other rooms."""
         ov = self.priority_override(mac)
         room_ov: dict[int, bool] = ov.setdefault("rooms", {})
         had_prev = room_id in room_ov
         prev = room_ov.get(room_id)
+        had_prev_type = "priority_type" in ov
+        prev_type = ov.get("priority_type")
         room_ov[room_id] = included
         selected = self.effective_selected_rooms(mac, priority)
         if not selected:
@@ -409,7 +428,12 @@ class ResideoDataUpdateCoordinator(DataUpdateCoordinator[dict[str, ResideoDevice
                 room_ov.pop(room_id, None)
             raise ResideoError("At least one room must remain selected in priority configuration")
         rooms_list = sorted(selected)
-        p_type = ov.get("priority_type") or priority.priority_type or "PickARoom"
+        self._last_selected_rooms[mac] = rooms_list
+        p_type = ov.get("priority_type") or priority.priority_type or PRIORITY_PICK_A_ROOM
+        if p_type == PRIORITY_FOLLOW_ME:
+            # Explicit room selection is only valid under PickARoom (FollowMe + SelectedRooms -> 400).
+            p_type = PRIORITY_PICK_A_ROOM
+            ov["priority_type"] = PRIORITY_PICK_A_ROOM
         status = priority.priority_status or "PermanentHold"
         try:
             return await self.api.async_set_priority(
@@ -420,6 +444,10 @@ class ResideoDataUpdateCoordinator(DataUpdateCoordinator[dict[str, ResideoDevice
                 room_ov[room_id] = prev  # type: ignore[assignment]
             else:
                 room_ov.pop(room_id, None)
+            if had_prev_type:
+                ov["priority_type"] = prev_type
+            else:
+                ov.pop("priority_type", None)
             raise
 
     # -- SignalR streaming ----------------------------------------------------
