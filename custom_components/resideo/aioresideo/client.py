@@ -30,6 +30,7 @@ from .const import (
     APP_USER_AGENT,
     DEFAULT_CHANNEL_ID,
     OCP_APIM_SUBSCRIPTION_KEY,
+    PRIORITY_FOLLOW_ME,
     REQUEST_TIMEOUT,
     SETPOINT_PERMANENT_HOLD,
     SIGNALR_NEGOTIATE_URL,
@@ -362,20 +363,26 @@ class ResideoClient:
         self,
         mac: str,
         priority_type: str,
-        rooms: list[int],
+        rooms: list[int] | None = None,
         status: str = SETPOINT_PERMANENT_HOLD,
     ) -> dict[str, Any]:
-        """Set room priority (PickARoom/FollowMe). ◐ TODO verify live."""
+        """Set room priority (PickARoom/FollowMe). ✅ verified live (spec §4).
+
+        ``FollowMe`` must NOT include ``SelectedRooms`` — sending a room list with ``FollowMe``
+        is rejected with ``400 InvalidInput: FollowMe is not valid with SelectedRooms``.
+        """
+        current_priority: dict[str, Any] = {
+            "PriorityType": priority_type,
+            "Rooms": None,
+        }
+        if priority_type != PRIORITY_FOLLOW_ME:
+            current_priority["SelectedRooms"] = rooms if rooms is not None else [0]
         return await self._command(
             mac,
             "priority",
             {
                 "PriorityStatus": status,
-                "CurrentPriority": {
-                    "PriorityType": priority_type,
-                    "SelectedRooms": rooms,
-                    "Rooms": None,
-                },
+                "CurrentPriority": current_priority,
             },
         )
 

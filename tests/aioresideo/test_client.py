@@ -272,3 +272,53 @@ async def test_invalid_refresh_token_raises_auth_error(session) -> None:
         m.post(OAUTH_TOKEN_URL, status=401)
         with pytest.raises(ResideoAuthError):
             await client.async_ensure_token()
+
+
+async def test_set_priority_pick_a_room_includes_selected_rooms(session) -> None:
+    """PickARoom sends SelectedRooms explicitly."""
+    client = _fresh_client(session)
+    seen_body: dict = {}
+
+    def capture(url, **kwargs):
+        seen_body.update(kwargs["json"])
+        return CallbackResult(status=202, payload={"TransactionId": "tx-prio-1"})
+
+    with aioresponses() as m:
+        m.put(f"{DEVICE_URL_V1}/priority", callback=capture)
+        resp = await client.set_priority(MAC, "PickARoom", [0, 3, 5])
+
+    assert resp == {"TransactionId": "tx-prio-1"}
+    assert seen_body == {
+        "PriorityStatus": "PermanentHold",
+        "CurrentPriority": {
+            "PriorityType": "PickARoom",
+            "SelectedRooms": [0, 3, 5],
+            "Rooms": None,
+        },
+        "ChannelId": "ds-notification-service",
+    }
+
+
+async def test_set_priority_follow_me_omits_selected_rooms(session) -> None:
+    """FollowMe must omit SelectedRooms (API returns 400 InvalidInput if present)."""
+    client = _fresh_client(session)
+    seen_body: dict = {}
+
+    def capture(url, **kwargs):
+        seen_body.update(kwargs["json"])
+        return CallbackResult(status=202, payload={"TransactionId": "tx-prio-2"})
+
+    with aioresponses() as m:
+        m.put(f"{DEVICE_URL_V1}/priority", callback=capture)
+        resp = await client.set_priority(MAC, "FollowMe", [0, 3, 5])
+
+    assert resp == {"TransactionId": "tx-prio-2"}
+    assert "SelectedRooms" not in seen_body["CurrentPriority"]
+    assert seen_body == {
+        "PriorityStatus": "PermanentHold",
+        "CurrentPriority": {
+            "PriorityType": "FollowMe",
+            "Rooms": None,
+        },
+        "ChannelId": "ds-notification-service",
+    }

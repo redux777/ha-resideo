@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.4.4] - 2026-11-24
+
+### Fixed
+- **`FollowMe` Room Priority Mode `400 InvalidInput` (`client.py`, `coordinator.py`, `aioresideo/__init__.py`)**:
+  - Omitted `SelectedRooms` from `PUT /v1/devices/thermostats/{mac}/priority` when `PriorityType` is `"FollowMe"` (Resideo's API rejects `"FollowMe"` requests carrying `SelectedRooms` with `400 InvalidInput: FollowMe is not valid with SelectedRooms`).
+  - Cached the last non-empty `SelectedRooms` per thermostat in `ResideoDataUpdateCoordinator` so switching `PickARoom` → `FollowMe` → `PickARoom` restores the user's multi-room selection instead of collapsing back to `[0]`.
+  - Automatically transition `PriorityType` back to `"PickARoom"` if a per-room priority switch (`switch.*_room_priority`) is toggled while `"FollowMe"` is active.
+
 ## [v0.4.3] - 2026-11-07
 
 ### Added
